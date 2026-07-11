@@ -14,19 +14,19 @@
 
   <style>
     :root {
-      --color-primary: #2E3A45;
-      --color-cta:     #5B7C99;
-      --color-cta-hover: #47637A;
+      --color-primary: #7289AD;
+      --color-cta:     #7289AD;
+      --color-cta-hover: #5D75A0;
       --color-sage:    #7C9473;
-      --color-text:    #33404A;
-      --color-bg:      #FBF3E6;
-      --color-muted:   rgba(51,64,74,0.6);
-      --color-border:  rgba(51,64,74,0.14);
+      --color-text:    #333333;
+      --color-bg:      #FAF8F4;
+      --color-muted:   rgba(51,51,51,0.6);
+      --color-border:  rgba(51,51,51,0.12);
       --font-headline: 'Noto Serif TC', serif;
       --font-body:     'Noto Sans TC', sans-serif;
       --transition:    250ms cubic-bezier(0.4, 0, 0.2, 1);
-      --shadow-soft:   0 4px 12px rgba(51,64,74,0.08);
-      --shadow-hover:  0 10px 28px rgba(51,64,74,0.14);
+      --shadow-soft:   0 4px 12px rgba(51,51,51,0.08);
+      --shadow-hover:  0 10px 28px rgba(51,51,51,0.14);
     }
 
     html { scroll-behavior: smooth; }
@@ -53,7 +53,7 @@
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(480px 360px at 12% 8%, rgba(91,124,153,0.12), transparent 70%),
+        radial-gradient(480px 360px at 12% 8%, rgba(114,137,173,0.12), transparent 70%),
         radial-gradient(520px 400px at 90% 12%, rgba(124,148,115,0.14), transparent 70%),
         radial-gradient(560px 420px at 50% 100%, rgba(217,164,65,0.12), transparent 70%);
     }
@@ -71,7 +71,7 @@
     .blob-accent::after {
       content: ""; position: absolute; z-index: 0;
       width: 260px; height: 260px; border-radius: 50%;
-      background: rgba(91,124,153,0.10);
+      background: rgba(114,137,173,0.10);
       bottom: -120px; left: -80px;
     }
 
@@ -112,7 +112,7 @@
     .step-tag { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; color: var(--color-cta); text-transform: uppercase; margin-bottom: 0.75rem; }
 
     .pricing-card { background: #fff; border: 1px solid var(--color-border); border-radius: 22px; padding: 2rem; box-shadow: var(--shadow-soft); transition: all var(--transition); }
-    .pricing-card.highlighted { border: 2px solid var(--color-cta); box-shadow: 0 8px 32px rgba(91,124,153,0.18); }
+    .pricing-card.highlighted { border: 2px solid var(--color-cta); box-shadow: 0 8px 32px rgba(114,137,173,0.18); }
     .pricing-plan { font-size: 0.95rem; font-weight: 700; letter-spacing: 1px; color: var(--color-primary); margin-bottom: 0.5rem; }
     .pricing-price { font-size: 2rem; font-weight: 700; color: var(--color-cta); font-family: var(--font-headline); }
     .pricing-price-old { font-size: 1.1rem; font-weight: 400; color: var(--color-muted); text-decoration: line-through; margin-right: 0.5rem; }
@@ -172,7 +172,7 @@
     .form-card { background: #fff; border: 1px solid var(--color-border); border-radius: 22px; padding: 2rem; box-shadow: var(--shadow-soft); }
     .err-msg { font-size: 0.85rem; color: #B5453F; margin-top: 1rem; display: none; }
     .thanks-box { text-align: center; padding: 2rem 0; }
-    .contact-card { background: rgba(51,64,74,0.06); border-radius: 16px; padding: 1.25rem; margin-top: 1.5rem; display: inline-block; }
+    .contact-card { background: rgba(51,51,51,0.06); border-radius: 16px; padding: 1.25rem; margin-top: 1.5rem; display: inline-block; }
 
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
   </style>
@@ -197,7 +197,7 @@
 <!-- 1. Hero + 痛點（合併，痛點提前） -->
 <section id="hero">
   <div class="container-tight" style="text-align:center;">
-    <p style="display:inline-block;font-size:0.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--color-primary);font-weight:700;margin-bottom:1.5rem;padding:0.4rem 1rem;border-radius:999px;background:rgba(91,124,153,0.12);border:1px solid rgba(91,124,153,0.3);">人類圖 × 教練陪跑・一對一諮詢</p>
+    <p style="display:inline-block;font-size:0.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--color-primary);font-weight:700;margin-bottom:1.5rem;padding:0.4rem 1rem;border-radius:999px;background:rgba(114,137,173,0.12);border:1px solid rgba(114,137,173,0.3);">人類圖 × 教練陪跑・一對一諮詢</p>
     <h1>很多人都渴望做自己，<br>但<span style="color:var(--color-cta);">真正的自己</span>是什麼樣子？</h1>
     <p style="font-size:1.05rem;color:var(--color-muted);margin:1.5rem 0 0;max-width:480px;margin-left:auto;margin-right:auto;">社會的標準。原生家庭的制約。你努力想活成的那個人。<br>這些都不是你——但你可能分不出來，哪個才是。</p>
 
