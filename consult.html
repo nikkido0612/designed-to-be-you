@@ -60,6 +60,21 @@
     @media (min-width: 768px) { #hero { padding: 10rem 0 6rem; } }
     #hero .container-tight { position: relative; z-index: 1; }
 
+    .blob-accent { position: relative; overflow: hidden; }
+    .blob-accent > * { position: relative; z-index: 1; }
+    .blob-accent::before {
+      content: ""; position: absolute; z-index: 0;
+      width: 340px; height: 340px; border-radius: 50%;
+      background: rgba(217,164,65,0.14);
+      top: -140px; right: -100px;
+    }
+    .blob-accent::after {
+      content: ""; position: absolute; z-index: 0;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: rgba(193,101,63,0.10);
+      bottom: -120px; left: -80px;
+    }
+
     /* ===== Nav ===== */
     #siteNav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -220,13 +235,15 @@
 </section>
 
 <!-- 2.5 人類圖是什麼 -->
-<section id="whatis">
+<section id="whatis" style="background:#fff;">
   <div class="container-tight">
-    <h2>人類圖是什麼？</h2>
-    <p>簡單來說，就是一張專屬於你的人生使用說明書！</p>
-    <p>每一個人都有不同的設計，有不同的天賦才華及固定運作的模式，同時也有開放被外界影響的不同課題。</p>
-    <p>從這些課題中可以累積人生的智慧，進而完成每一個人的不同使命！</p>
-    <p style="font-weight:600;color:var(--color-primary);">透過了解自己可以做出正確的選擇，如果理解他人，更能夠建立美好的關係。</p>
+    <div style="background:rgba(124,148,115,0.10); border:1px solid rgba(124,148,115,0.28); border-radius:24px; padding:2.5rem;">
+      <h2>人類圖是什麼？</h2>
+      <p>簡單來說，就是一張專屬於你的人生使用說明書！</p>
+      <p>每一個人都有不同的設計，有不同的天賦才華及固定運作的模式，同時也有開放被外界影響的不同課題。</p>
+      <p>從這些課題中可以累積人生的智慧，進而完成每一個人的不同使命！</p>
+      <blockquote style="border-left:4px solid var(--color-sage); margin:1.5rem 0 0; padding-left:1.25rem; font-weight:600; color:var(--color-primary);">透過了解自己可以做出正確的選擇，如果理解他人，更能夠建立美好的關係。</blockquote>
+    </div>
   </div>
 </section>
 
@@ -263,7 +280,7 @@
 </section>
 
 <!-- 4.5 成效承諾 -->
-<section id="outcomes" style="background:#fff;">
+<section id="outcomes" class="blob-accent" style="background:#fff;">
   <div class="container-tight">
     <h2 style="text-align:center;">做完之後，你會帶走什麼？</h2>
     <div style="margin-top:2rem;">
@@ -297,7 +314,7 @@
 </section>
 
 <!-- 4.7 服務細節 -->
-<section id="details" style="background:#fff;">
+<section id="details" class="blob-accent" style="background:#fff;">
   <div class="container-tight">
     <h2>服務細節</h2>
     <div style="margin-top:1.25rem;">
@@ -315,7 +332,8 @@
     <h2 style="text-align:center;">方案與價格</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;max-width:760px;margin-left:auto;margin-right:auto;">
 
-      <div class="pricing-card highlighted">
+      <div class="pricing-card highlighted" style="position:relative;">
+        <span style="position:absolute; top:-14px; left:2rem; background:var(--color-cta); color:#fff; font-size:0.75rem; font-weight:700; padding:0.3rem 0.9rem; border-radius:999px; box-shadow:var(--shadow-soft);">入門首選</span>
         <p class="pricing-plan">方案一・單次深度解讀</p>
         <p><span class="pricing-price-old">NT$4,500</span><span class="pricing-price">NT$3,600</span></p>
         <p class="pricing-note">1.5 小時・線上或實體皆可</p>
