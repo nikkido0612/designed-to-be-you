@@ -47,8 +47,8 @@
 
     section { padding: 4rem 0; }
     @media (min-width: 768px) { section { padding: 6rem 0; } }
-    #hero { padding: 7rem 0 5rem; }
-    @media (min-width: 768px) { #hero { padding: 9rem 0 6rem; } }
+    #hero { padding: 7rem 0 4rem; }
+    @media (min-width: 768px) { #hero { padding: 9rem 0 5rem; } }
 
     /* ===== Nav ===== */
     #siteNav {
@@ -80,27 +80,36 @@
     #hook   { background: rgba(59,47,47,0.03); }
     #speaker { background: rgba(59,47,47,0.03); }
 
-    .pain-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 1.25rem; background: #fff; border-radius: 10px; border: 1px solid var(--color-border); margin-bottom: 0.75rem; box-shadow: var(--shadow-soft); }
+    .pain-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 1.25rem; background: #fff; border-radius: 10px; border: 1px solid var(--color-border); margin-bottom: 0.75rem; box-shadow: var(--shadow-soft); text-align: left; }
     .pain-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
 
     .step-card { background: #fff; border: 1px solid var(--color-border); border-radius: 14px; padding: 2rem; box-shadow: var(--shadow-soft); }
     .step-tag { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; color: var(--color-cta); text-transform: uppercase; margin-bottom: 0.75rem; }
 
     .pricing-card { background: #fff; border: 1px solid var(--color-border); border-radius: 14px; padding: 2rem; box-shadow: var(--shadow-soft); transition: all var(--transition); }
-    .pricing-card.highlighted { border: 2px solid var(--color-cta); box-shadow: 0 8px 32px rgba(201,168,124,0.18); }
+    .pricing-card.highlighted { border: 2px solid var(--color-cta); box-shadow: 0 8px 32px rgba(255,130,0,0.18); }
     .pricing-plan { font-size: 0.95rem; font-weight: 700; letter-spacing: 1px; color: var(--color-primary); margin-bottom: 0.5rem; }
-    .pricing-price { font-size: 2rem; font-weight: 700; color: var(--color-primary); font-family: var(--font-headline); }
+    .pricing-price { font-size: 2rem; font-weight: 700; color: var(--color-cta); font-family: var(--font-headline); }
+    .pricing-price-old { font-size: 1.1rem; font-weight: 400; color: var(--color-muted); text-decoration: line-through; margin-right: 0.5rem; }
     .pricing-note { font-size: 0.875rem; color: var(--color-muted); margin-top: 0.5rem; }
     .pricing-flow-item { display: flex; gap: 0.6rem; align-items: flex-start; margin: 0.6rem 0; font-size: 0.925rem; }
     .pricing-flow-item::before { content: "→"; color: var(--color-cta); flex-shrink: 0; }
 
-    .founder-box { background: rgba(201,168,124,0.12); border: 1px solid var(--color-cta); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+    .founder-banner { background: var(--color-primary); color: #FAF7F2; border-radius: 16px; padding: 2.5rem; text-align: center; }
+    .founder-banner h2 { color: #fff; }
+    .founder-banner p { color: rgba(250,247,242,0.8); }
+    .founder-tag { display: inline-block; background: var(--color-cta); color: #fff; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1rem; }
 
     .speaker-card { display: flex; gap: 2rem; align-items: flex-start; }
     @media (max-width: 640px) { .speaker-card { flex-direction: column; align-items: center; text-align: center; } }
     .speaker-avatar { width: 112px; height: 112px; border-radius: 50%; background: rgba(59,47,47,0.1); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-family: var(--font-headline); color: var(--color-primary); font-weight: 700; }
     .speaker-bio-item { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.5rem; font-size: 0.95rem; }
     .speaker-bio-item::before { content: "—"; color: var(--color-cta); flex-shrink: 0; }
+    .speaker-stat-row { display: flex; gap: 2rem; margin-top: 1.5rem; }
+    .speaker-stat { text-align: center; }
+    @media (max-width: 640px) { .speaker-stat-row { justify-content: center; } }
+    .speaker-stat .num { font-family: var(--font-headline); font-size: 1.75rem; font-weight: 700; color: var(--color-cta); }
+    .speaker-stat .label { font-size: 0.8rem; color: var(--color-muted); }
 
     details.faq-item { border-bottom: 1px solid var(--color-border); }
     details.faq-item summary { cursor: pointer; font-weight: 600; padding: 1.1rem 0; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 1rem; }
@@ -137,9 +146,8 @@
   <div class="nav-inner">
     <a class="nav-brand" href="index.html" style="display:flex;align-items:center;gap:0.5rem;"><img src="logo.png" alt="" style="width:28px;height:28px;">Designed to be YOU</a>
     <ul class="nav-links">
-      <li><a href="#what">能為你做什麼</a></li>
-      <li><a href="#plans">方案與價格</a></li>
       <li><a href="#speaker">帶領者</a></li>
+      <li><a href="#plans">方案與價格</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
     <a class="nav-cta" href="#book">立即預約</a>
@@ -148,17 +156,44 @@
 
 <a id="top"></a>
 
-<!-- 1. Hero -->
+<!-- 1. Hero + 痛點（合併，痛點提前） -->
 <section id="hero">
   <div class="container-tight" style="text-align:center;">
     <p style="font-size:0.875rem;letter-spacing:2px;text-transform:uppercase;color:var(--color-muted);margin-bottom:1.25rem;">人類圖 × 教練陪跑・一對一諮詢</p>
     <h1>很多人都渴望做自己，<br>但真正的自己是什麼樣子？</h1>
-    <p style="font-size:1.05rem;color:var(--color-muted);margin:1.5rem 0 0;max-width:520px;margin-left:auto;margin-right:auto;">你以為的自己，是社會堆出來的標準，是原生家庭教出來的制約，還是你渴望成為的那個人——又或者，只是活成了別人期望下的那個人？這些「自己」，離你真正的自己，可能越來越遠。</p>
-    <a class="cta-primary" href="#book" style="margin-top:2.5rem;">預約一次深度解讀</a>
+    <p style="font-size:1.05rem;color:var(--color-muted);margin:1.5rem 0 0;max-width:520px;margin-left:auto;margin-right:auto;">你以為的自己，是社會堆出來的標準，是原生家庭教出來的制約，還是你渴望成為的那個人？這些「自己」，離你真正的自己，可能越來越遠。</p>
+
+    <div style="margin-top:2.5rem;max-width:480px;margin-left:auto;margin-right:auto;">
+      <div class="pain-item"><span class="pain-icon">💼</span><span>工作上很努力，也賺到了錢，可是心裡總覺得少了什麼</span></div>
+      <div class="pain-item"><span class="pain-icon">🌀</span><span>工作一直不開心，很想換，卻又怕換了還是找不到自己喜歡的</span></div>
+      <div class="pain-item"><span class="pain-icon">💬</span><span>關係裡一直忍耐，說不清楚為什麼，也不知道該堅持還是放手</span></div>
+    </div>
+
+    <a class="cta-primary" href="#book" style="margin-top:2rem;">預約一次深度解讀</a>
   </div>
 </section>
 
-<!-- 2. 人類圖能為你做什麼 -->
+<!-- 2. Speaker（信任狀提前） -->
+<section id="speaker">
+  <div class="container-tight">
+    <h2>帶領者</h2>
+    <div class="speaker-card" style="margin-top:1.5rem;">
+      <div class="speaker-avatar">楊</div>
+      <div>
+        <h3 style="margin-bottom:1rem;">楊明怡 NIKKI</h3>
+        <div class="speaker-bio-item">修習人類圖超過 15 年</div>
+        <div class="speaker-bio-item">擅長將抽象系統轉化為可操作的日常工具</div>
+        <div class="speaker-bio-item">用精準的聆聽，陪你在真實情境裡分辨「這是真的你，還是制約的雜音」</div>
+        <div class="speaker-stat-row">
+          <div class="speaker-stat"><div class="num">20 年</div><div class="label">生命教練經驗</div></div>
+          <div class="speaker-stat"><div class="num">近千位</div><div class="label">陪跑個案</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 人類圖能為你做什麼 -->
 <section id="what" style="background:#fff;">
   <div class="container-tight">
     <h2>人類圖能為你做什麼？</h2>
@@ -169,7 +204,7 @@
   </div>
 </section>
 
-<!-- 3. 兩步驟 -->
+<!-- 4. 兩步驟 -->
 <section id="steps">
   <div class="container-wide">
     <h2 style="text-align:center;">從認識自己，到真正用出來</h2>
@@ -185,32 +220,32 @@
         <p style="font-size:0.975rem;">但知道「方法」，不代表你在真實生活裡用得出來。那個「我不夠好」的念頭，還是會在你要做決定的當下跳出來——這時候需要的不是再解讀一次盤面，是有人能在你說話的當下，精準聽出這句話是哪裡來的雜音。20 年教練訓練出來的耳朵，加上人類圖的整合能力，讓我能陪你把第一步認識到的自己，真正用在你正卡住的決定上。</p>
       </div>
     </div>
+    <p style="text-align:center;margin-top:2rem;font-size:1.05rem;">近千個個案陪跑下來，我看到同一件事反覆發生：背後常常是同一個雜音在作祟。認識自己是第一步，用真正的自己做決定，才是你走向天賦的開始。</p>
   </div>
 </section>
 
-<!-- 4. 具體成果 / Hook -->
-<section id="hook">
+<!-- 5. 創始優惠 Banner -->
+<section id="founder" style="background:#fff;">
   <div class="container-tight">
-    <h2>這些情境，聽起來熟悉嗎？</h2>
-    <div style="margin-top:1.5rem;">
-      <div class="pain-item"><span class="pain-icon">💼</span><span>工作上很努力，也賺到了錢，可是心裡總覺得少了什麼</span></div>
-      <div class="pain-item"><span class="pain-icon">🌀</span><span>工作一直不開心，很想換，卻又怕換了還是找不到自己喜歡的</span></div>
-      <div class="pain-item"><span class="pain-icon">💬</span><span>關係裡一直忍耐，說不清楚為什麼，也不知道該堅持還是放手</span></div>
+    <div class="founder-banner">
+      <span class="founder-tag">🌱 創始個案優惠</span>
+      <h2>前 5-10 位個案，享創始優惠價</h2>
+      <p style="max-width:440px;margin:0 auto;">這是全新服務，前 5-10 位個案享有創始優惠價，交換你使用後的心得分享。額滿為止，之後回到正式定價。</p>
+      <a class="cta-primary" href="#book" style="margin-top:1.75rem;">搶創始優惠名額</a>
     </div>
-    <p style="margin-top:2rem;font-size:1.05rem;">近千個個案陪跑下來，我看到同一件事反覆發生：背後常常是同一個雜音在作祟。認識自己是第一步，用真正的自己做決定，才是你走向天賦的開始。</p>
   </div>
 </section>
 
-<!-- 5. 方案與價格 -->
-<section id="plans" style="background:#fff;">
+<!-- 6. 方案與價格 -->
+<section id="plans">
   <div class="container-wide">
     <h2 style="text-align:center;">方案與價格</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;max-width:760px;margin-left:auto;margin-right:auto;">
 
       <div class="pricing-card highlighted">
         <p class="pricing-plan">方案一・單次深度解讀</p>
-        <p class="pricing-price">NT$3,200<span style="font-size:1rem;font-weight:400;color:var(--color-muted);">–4,000</span></p>
-        <p class="pricing-note">1.5 小時・線上或實體皆可</p>
+        <p><span class="pricing-price-old">NT$3,600</span><span class="pricing-price">NT$2,800</span></p>
+        <p class="pricing-note">創始價・1.5 小時・線上或實體皆可</p>
         <div style="margin-top:1.25rem;">
           <div class="pricing-flow-item">開場釐清這次帶著什麼卡住的決定而來</div>
           <div class="pricing-flow-item">完整解讀類型、內在權威、能量中心、關鍵閘門通道</div>
@@ -222,8 +257,8 @@
 
       <div class="pricing-card">
         <p class="pricing-plan">方案二・教練陪跑（核心期）</p>
-        <p class="pricing-price">NT$8,000<span style="font-size:1rem;font-weight:400;color:var(--color-muted);">–8,800</span></p>
-        <p class="pricing-note">4 次・每次 1 小時・每週一次，約 1 個月</p>
+        <p><span class="pricing-price-old">NT$8,400</span><span class="pricing-price">NT$7,400</span></p>
+        <p class="pricing-note">創始價・4 次・每次 1 小時・每週一次，約 1 個月</p>
         <div style="margin-top:1.25rem;">
           <div class="pricing-flow-item">第 1 次：釐清這個月要處理的具體情境</div>
           <div class="pricing-flow-item">第 2-3 次：陪你在真實情境裡練習分辨</div>
@@ -233,28 +268,6 @@
       </div>
 
     </div>
-
-    <div class="founder-box container-tight" style="max-width:600px;">
-      <p style="font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;">🌱 創始個案優惠</p>
-      <p style="font-size:0.925rem;margin:0;">這是全新服務，前 5-10 位個案享有創始優惠（別價或加送一次對話），交換你使用後的心得分享。額滿為止。</p>
-    </div>
-  </div>
-</section>
-
-<!-- 6. Speaker -->
-<section id="speaker">
-  <div class="container-tight">
-    <h2>帶領者</h2>
-    <div class="speaker-card" style="margin-top:1.5rem;">
-      <div class="speaker-avatar">楊</div>
-      <div>
-        <h3 style="margin-bottom:1rem;">楊明怡 NIKKI</h3>
-        <div class="speaker-bio-item">修習人類圖超過 15 年</div>
-        <div class="speaker-bio-item">20 年生命教練經驗，陪跑近千位個案</div>
-        <div class="speaker-bio-item">擅長將抽象系統轉化為可操作的日常工具</div>
-        <div class="speaker-bio-item">用精準的聆聽，陪你在真實情境裡分辨「這是真的你，還是制約的雜音」</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -263,6 +276,10 @@
   <div class="container-tight">
     <h2>常見問題</h2>
     <div style="margin-top:1.5rem;">
+      <details class="faq-item">
+        <summary>這是心理諮商或醫療服務嗎？</summary>
+        <p class="faq-answer">不是。這是人類圖解讀加上教練陪伴，幫助你釐清決定、看懂自己的設計，不能取代醫療或心理治療。如果你正在經歷需要專業醫療協助的狀況，建議優先尋求相關專業協助。</p>
+      </details>
       <details class="faq-item">
         <summary>我完全不懂人類圖，適合預約嗎？</summary>
         <p class="faq-answer">適合。單次解讀會先從你帶來的困惑開始，再完整解讀你的設計，不需要任何基礎。</p>
@@ -274,10 +291,6 @@
       <details class="faq-item">
         <summary>陪跑核心期 4 次結束後一定要繼續嗎？</summary>
         <p class="faq-answer">不用。第 4 次會一起檢視進展，你可以決定要不要加購延伸期，沒有強制續約。</p>
-      </details>
-      <details class="faq-item">
-        <summary>這是心理諮商或醫療服務嗎？</summary>
-        <p class="faq-answer">不是。這是人類圖解讀加上教練陪伴，幫助你釐清決定、看懂自己的設計，不能取代醫療或心理治療。如果你正在經歷需要專業醫療協助的狀況，建議優先尋求相關專業協助。</p>
       </details>
       <details class="faq-item">
         <summary>預約後多久會收到回覆？</summary>
