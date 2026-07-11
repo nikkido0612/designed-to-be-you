@@ -15,7 +15,8 @@
   <style>
     :root {
       --color-primary: #3B2F2F;
-      --color-cta:     #C9A87C;
+      --color-cta:     #FF8200;
+      --color-cta-hover: #E67300;
       --color-text:    #2D2A28;
       --color-bg:      #FAF7F2;
       --color-muted:   rgba(45,42,40,0.55);
@@ -73,7 +74,7 @@
       text-decoration: none; cursor: pointer; transition: all var(--transition);
       box-shadow: var(--shadow-soft); border: none;
     }
-    .cta-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); background: var(--color-cta-hover); }
     .cta-primary:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
     #hook   { background: rgba(59,47,47,0.03); }
@@ -134,7 +135,7 @@
 <!-- ===== Nav ===== -->
 <nav id="siteNav">
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html">Designed to be YOU</a>
+    <a class="nav-brand" href="index.html" style="display:flex;align-items:center;gap:0.5rem;"><img src="logo.png" alt="" style="width:28px;height:28px;">Designed to be YOU</a>
     <ul class="nav-links">
       <li><a href="#what">能為你做什麼</a></li>
       <li><a href="#plans">方案與價格</a></li>

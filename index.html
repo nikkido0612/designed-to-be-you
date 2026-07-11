@@ -15,7 +15,8 @@
   <style>
     :root {
       --color-primary: #3B2F2F;
-      --color-cta:     #C9A87C;
+      --color-cta:     #FF8200;
+      --color-cta-hover: #E67300;
       --color-text:    #2D2A28;
       --color-bg:      #FAF7F2;
       --color-muted:   rgba(45,42,40,0.55);
@@ -111,7 +112,7 @@
       transition: all var(--transition);
       box-shadow: var(--shadow-soft);
     }
-    .cta-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); background: var(--color-cta-hover); }
     .cta-primary:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
 
     /* ===== Countdown Big ===== */
@@ -292,7 +293,7 @@
 <!-- ===== Nav ===== -->
 <nav id="siteNav">
   <div class="nav-inner">
-    <a class="nav-brand" href="#top">Designed to be YOU</a>
+    <a class="nav-brand" href="#top" style="display:flex;align-items:center;gap:0.5rem;"><img src="logo.png" alt="" style="width:28px;height:28px;">Designed to be YOU</a>
     <ul class="nav-links">
       <li><a href="#about">關於</a></li>
       <li><a href="#learn">你會帶走</a></li>
