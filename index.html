@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>你的人生使用說明書 — Designed to be YOU</title>
+  <meta name="description" content="一份 10 頁的人類圖入門說明書，讓你今天就開始用「真正的你自己」">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-primary: #3B2F2F;
+      --color-cta:     #C9A87C;
+      --color-text:    #2D2A28;
+      --color-bg:      #FAF7F2;
+      --color-muted:   rgba(45,42,40,0.55);
+      --color-border:  rgba(45,42,40,0.12);
+      --font-headline: 'Noto Serif TC', serif;
+      --font-body:     'Noto Sans TC', sans-serif;
+      --transition:    250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-soft:   0 4px 12px rgba(0,0,0,0.06);
+      --shadow-hover:  0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    h1, h2, h3 { font-family: var(--font-headline) !important; font-weight: 700 !important; line-height: 1.25; }
+    h1 { font-size: clamp(1.85rem, 5vw, 3.25rem) !important; }
+    h2 { font-size: clamp(1.4rem, 3.5vw, 2.1rem) !important; margin-bottom: 1rem; }
+    h3 { font-size: 1.2rem !important; margin-bottom: 0.75rem; }
+
+    .container-tight { max-width: 672px; margin: 0 auto; padding: 0 1.5rem; }
+    .container-wide  { max-width: 896px; margin: 0 auto; padding: 0 1.5rem; }
+
+    section { padding: 4rem 0; }
+    @media (min-width: 768px) { section { padding: 6rem 0; } }
+    #hero { padding: 7rem 0 5rem; }
+    @media (min-width: 768px) { #hero { padding: 10rem 0 7rem; } }
+
+    /* ===== Nav ===== */
+    #siteNav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    #siteNav.scrolled {
+      border-color: var(--color-border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .nav-inner {
+      max-width: 1024px; margin: 0 auto;
+      padding: 0 1.5rem;
+      height: 64px;
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    }
+    .nav-brand {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--color-primary);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0;
+    }
+    .nav-links a {
+      font-size: 0.875rem; color: var(--color-text); text-decoration: none;
+      opacity: 0.7;
+      transition: opacity var(--transition);
+    }
+    .nav-links a:hover { opacity: 1; }
+    @media (max-width: 860px) { .nav-links { display: none; } }
+    .nav-cta {
+      background: var(--color-cta);
+      color: #fff;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: opacity var(--transition);
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ===== CTA Button ===== */
+    .cta-primary {
+      display: inline-block;
+      background: var(--color-cta);
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: var(--shadow-soft);
+    }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .cta-primary:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
+
+    /* ===== Countdown Big ===== */
+    #countdown-big {
+      display: flex; gap: 12px; justify-content: center;
+      margin: 2rem 0;
+      font-variant-numeric: tabular-nums;
+    }
+    #countdown-big .unit {
+      background: rgba(59,47,47,0.05);
+      border: 1px solid var(--color-border);
+      padding: 12px 16px;
+      border-radius: 8px;
+      min-width: 72px;
+      text-align: center;
+    }
+    #countdown-big .num   { font-size: 2rem; font-weight: 700; color: var(--color-primary); font-family: var(--font-headline); }
+    #countdown-big .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--color-muted); margin-top: 4px; }
+
+    /* ===== Countdown Sticky ===== */
+    #countdown-sticky {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: var(--color-primary);
+      color: #FAF7F2;
+      padding: 0.75rem 1.5rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      z-index: 50;
+      transform: translateY(100%);
+      transition: transform var(--transition);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+    }
+    #countdown-sticky.visible { transform: translateY(0); }
+    #countdown-sticky .cta-compact {
+      background: var(--color-cta);
+      color: #fff;
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: opacity var(--transition);
+      font-size: 0.9rem;
+    }
+    #countdown-sticky .cta-compact:hover { opacity: 0.88; }
+    #countdown-sticky .sticky-label { font-size: 0.9rem; opacity: 0.85; }
+    @media (max-width: 640px) {
+      #countdown-sticky { padding: 0.5rem 1rem; font-size: 0.85rem; }
+    }
+
+    /* ===== Section styles ===== */
+    #hook   { background: rgba(59,47,47,0.03); }
+    #speaker { background: rgba(59,47,47,0.03); }
+
+    #hook p, #about p { font-size: 1.05rem; margin-bottom: 1rem; }
+
+    .pain-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 1.25rem;
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid var(--color-border);
+      margin-bottom: 0.75rem;
+      box-shadow: var(--shadow-soft);
+    }
+    .pain-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    .learn-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .learn-item:last-child { border-bottom: none; }
+    .learn-check { color: var(--color-cta); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
+
+    .info-item {
+      display: flex; gap: 1rem; padding: 0.875rem 0;
+      border-bottom: 1px solid var(--color-border);
+      align-items: baseline;
+    }
+    .info-item:last-child { border-bottom: none; }
+    .info-label { font-weight: 600; min-width: 160px; flex-shrink: 0; }
+    .info-value { color: var(--color-muted); }
+
+    .pricing-card {
+      background: #fff;
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      padding: 2rem;
+      box-shadow: var(--shadow-soft);
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .pricing-card.highlighted {
+      border: 2px solid var(--color-cta);
+      box-shadow: 0 8px 32px rgba(201,168,124,0.18);
+    }
+    .pricing-plan { font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; color: var(--color-muted); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .pricing-price { font-size: 2.5rem; font-weight: 700; color: var(--color-primary); font-family: var(--font-headline); }
+    .pricing-note { font-size: 0.875rem; color: var(--color-muted); margin-top: 0.5rem; }
+
+    .testimonial {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--color-border);
+    }
+    .testimonial .quote { font-style: italic; margin-bottom: 1rem; line-height: 1.7; }
+    .testimonial .author { font-size: 0.875rem; color: var(--color-muted); font-weight: 600; }
+
+    .audience-item {
+      display: flex; gap: 0.6rem; align-items: flex-start;
+      margin-bottom: 0.6rem; font-size: 0.975rem;
+    }
+    .audience-check { color: #7CA87C; font-weight: 700; flex-shrink: 0; }
+    .audience-cross { color: #C07C7C; font-weight: 700; flex-shrink: 0; }
+
+    details.faq-item {
+      border-bottom: 1px solid var(--color-border);
+    }
+    details.faq-item summary {
+      cursor: pointer;
+      font-weight: 600;
+      padding: 1.1rem 0;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1rem;
+    }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary::after {
+      content: "+";
+      font-size: 1.4rem;
+      color: var(--color-cta);
+      flex-shrink: 0;
+      transition: transform var(--transition);
+    }
+    details.faq-item[open] summary::after { transform: rotate(45deg); }
+    details.faq-item .faq-answer {
+      padding: 0 0 1.25rem;
+      color: var(--color-muted);
+      line-height: 1.75;
+    }
+
+    .speaker-card { display: flex; gap: 2rem; align-items: flex-start; }
+    @media (max-width: 640px) { .speaker-card { flex-direction: column; align-items: center; text-align: center; } }
+    .speaker-avatar {
+      width: 112px; height: 112px;
+      border-radius: 50%;
+      background: rgba(59,47,47,0.1);
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      font-family: var(--font-headline);
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+    .speaker-bio-item {
+      display: flex; gap: 0.6rem; align-items: flex-start;
+      margin-bottom: 0.5rem; font-size: 0.95rem;
+    }
+    .speaker-bio-item::before { content: "—"; color: var(--color-cta); flex-shrink: 0; }
+
+    #cta-final { background: var(--color-primary); color: #FAF7F2; }
+    #cta-final h2 { color: #FAF7F2; }
+    #cta-final p { color: rgba(250,247,242,0.72); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<nav id="siteNav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top">Designed to be YOU</a>
+    <ul class="nav-links">
+      <li><a href="#about">關於</a></li>
+      <li><a href="#learn">你會帶走</a></li>
+      <li><a href="#audience">適合誰</a></li>
+      <li><a href="#pricing">價格</a></li>
+      <li><a href="#speaker">帶領者</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-cta" href="#">立即取得</a>
+  </div>
+</nav>
+
+<a id="top"></a>
+
+<!-- 1. Hero -->
+<section id="hero">
+  <div class="container-tight" style="text-align:center;">
+    <p style="font-size:0.875rem;letter-spacing:2px;text-transform:uppercase;color:var(--color-muted);margin-bottom:1.25rem;">人類圖入門說明書</p>
+    <h1>你不是不夠努力，只是還不知道自己是誰<br><span style="color:var(--color-cta);">——這是你的人生使用說明書</span></h1>
+    <p style="font-size:1.1rem;color:var(--color-muted);margin:1.25rem 0 0;">一份 10 頁的人類圖入門說明書，讓你今天就開始用「真正的你自己」</p>
+
+    <div id="countdown-big" data-deadline="2026-06-07T23:59:00+08:00" data-onzero="ended-state">
+      <div class="unit"><div class="num" data-unit="days">00</div><div class="label">天</div></div>
+      <div class="unit"><div class="num" data-unit="hours">00</div><div class="label">時</div></div>
+      <div class="unit"><div class="num" data-unit="mins">00</div><div class="label">分</div></div>
+      <div class="unit"><div class="num" data-unit="secs">00</div><div class="label">秒</div></div>
+    </div>
+    <p style="font-size:0.8rem;color:var(--color-muted);margin-top:-0.5rem;margin-bottom:1.5rem;">早鳥價 NT$299 · 6/7 截止</p>
+
+    <a class="cta-primary" href="#">我要這份說明書</a>
+  </div>
+</section>
+
+<!-- 2. Hook -->
+<section id="hook">
+  <div class="container-tight">
+    <h2>你有這樣的感覺嗎？</h2>
+    <div style="margin-top:1.5rem;">
+      <div class="pain-item">
+        <span class="pain-icon">😵</span>
+        <span>人類圖術語太多，看了一堆定義，腦袋打結</span>
+      </div>
+      <div class="pain-item">
+        <span class="pain-icon">😩</span>
+        <span>想找一份「真正能用」的說明，不是又一堂要聽 10 小時的課</span>
+      </div>
+      <div class="pain-item">
+        <span class="pain-icon">🌀</span>
+        <span>身邊沒人懂人類圖，只能自己摸索，摸了很久還是霧煞煞</span>
+      </div>
+    </div>
+    <p style="margin-top:2rem;font-size:1.05rem;">你不是懶，也不是學不來——你只是需要一份真的能用的說明書。</p>
+  </div>
+</section>
+
+<!-- 3. About -->
+<section id="about">
+  <div class="container-tight">
+    <h2>這是什麼？</h2>
+    <p>這是一份很簡單的小工具，幫助剛接觸人類圖的你，可以踏出第一步開始使用「真正的你自己」。</p>
+    <p>不是課程，不是厚厚一本書，不需要先懂什麼術語。打開就能用，10 頁，全部是你今天可以直接動起來的內容。</p>
+    <p>它不會把你變成人類圖專家——但它會讓你第一次真正感覺到：<strong>「原來這就是我」。</strong></p>
+  </div>
+</section>
+
+<!-- 4. Learn -->
+<section id="learn">
+  <div class="container-tight">
+    <h2>用完你會帶走什麼</h2>
+    <div style="margin-top:1.5rem;">
+      <div class="learn-item">
+        <span class="learn-check">✦</span>
+        <span>知道自己「應該怎麼做決定」，不再靠感覺亂猜</span>
+      </div>
+      <div class="learn-item">
+        <span class="learn-check">✦</span>
+        <span>看懂哪些情況是在消耗你、哪些是在補充你</span>
+      </div>
+      <div class="learn-item">
+        <span class="learn-check">✦</span>
+        <span>下次有人問「你想要什麼」，你有答案了</span>
+      </div>
+      <div class="learn-item">
+        <span class="learn-check">✦</span>
+        <span>開始辨識什麼是「真正適合自己的節奏」</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Testimonials -->
+<section id="testimonials" style="background:#fff;">
+  <div class="container-wide">
+    <h2 style="text-align:center;">他們說…</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:2rem;">
+      <div class="testimonial">
+        <p class="quote">「我看人類圖看了一年，但每次要做決定還是不會用。這份說明書讓我第一次真的『用』到它——上週有個合作邀約，我用書裡的方法問自己，很清楚知道要說不。那個清晰的感覺真的很不一樣。」</p>
+        <p class="author">小雯 · 自由工作者</p>
+      </div>
+      <div class="testimonial">
+        <p class="quote">「本來以為又是一堆術語，沒想到打開就可以看懂。我是情緒權威，以前不知道，常常當下衝動答應後來後悔。現在我告訴自己『等一晚再回覆』，壓力小很多。」</p>
+        <p class="author">Erin · 全職媽媽</p>
+      </div>
+      <div class="testimonial">
+        <p class="quote">「買之前猶豫很久，因為之前買過的東西都看了前兩頁就沒了。這個真的有讀完，因為它不是在教你『懂人類圖』，是在教你『用自己』。感覺整個人輕了一點。」</p>
+        <p class="author">阿傑 · 上班族</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Audience -->
+<section id="audience">
+  <div class="container-tight">
+    <h2>這份說明書適合你嗎？</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;margin-top:1.5rem;">
+      <div>
+        <h3 style="color:#4A7A4A;">✓ 適合你，如果…</h3>
+        <div class="audience-item"><span class="audience-check">✓</span><span>剛接觸人類圖、還不知道從哪裡開始的人</span></div>
+        <div class="audience-item"><span class="audience-check">✓</span><span>想把人類圖用在日常生活、不只是「知道」的人</span></div>
+      </div>
+      <div>
+        <h3 style="color:#7A4A4A;">✗ 不適合你，如果…</h3>
+        <div class="audience-item"><span class="audience-cross">✗</span><span style="color:var(--color-muted);">已經深入研究人類圖、想學進階解讀的人</span></div>
+        <div class="audience-item"><span class="audience-cross">✗</span><span style="color:var(--color-muted);">希望有老師一對一帶著走的人——<a href="consult.html" style="color:var(--color-cta);text-decoration:underline;">這裡有一對一諮詢服務</a></span></div>
+        <div class="audience-item"><span class="audience-cross">✗</span><span style="color:var(--color-muted);">想要完整 HD 系統課程的人</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Info -->
+<section id="info" style="background:#fff;">
+  <div class="container-tight">
+    <h2>產品規格</h2>
+    <div style="margin-top:1.25rem;">
+      <div class="info-item"><span class="info-label">📦 格式</span><span class="info-value">PDF 電子書（可手機閱讀）</span></div>
+      <div class="info-item"><span class="info-label">📄 頁數</span><span class="info-value">約 10 頁</span></div>
+      <div class="info-item"><span class="info-label">🔄 更新</span><span class="info-value">購買後享終身更新，有新版會通知</span></div>
+      <div class="info-item"><span class="info-label">💻 適用裝置</span><span class="info-value">手機、平板、電腦皆可開啟</span></div>
+      <div class="info-item"><span class="info-label">🌐 語言</span><span class="info-value">繁體中文</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Pricing -->
+<section id="pricing">
+  <div class="container-wide">
+    <h2 style="text-align:center;">選擇你的方案</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:2rem;max-width:560px;margin-left:auto;margin-right:auto;">
+      <div class="pricing-card highlighted">
+        <p class="pricing-plan">早鳥價</p>
+        <p class="pricing-price">NT$299</p>
+        <p class="pricing-note">6/7 截止・限時優惠</p>
+        <a class="cta-primary" href="#" style="margin-top:1.5rem;display:block;text-align:center;">我要這份說明書</a>
+      </div>
+      <div class="pricing-card">
+        <p class="pricing-plan">原價</p>
+        <p class="pricing-price">NT$499</p>
+        <p class="pricing-note">6/7 後恢復原價</p>
+        <p style="margin-top:1.5rem;font-size:0.875rem;color:var(--color-muted);">錯過早鳥後仍可購買</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Final CTA -->
+<section id="cta-final">
+  <div class="container-tight" style="text-align:center;">
+    <h2>準備好開始用「真正的你自己」了嗎？</h2>
+    <p style="font-size:1.05rem;margin:1rem 0 2rem;">早鳥價 NT$299，6/7 截止。10 頁，全是你今天就能用的內容。</p>
+    <a class="cta-primary" href="#" style="background:#fff;color:var(--color-primary);">我要這份說明書</a>
+  </div>
+</section>
+
+<!-- 10. Speaker -->
+<section id="speaker">
+  <div class="container-tight">
+    <h2>帶領者</h2>
+    <div class="speaker-card" style="margin-top:1.5rem;">
+      <div class="speaker-avatar">楊</div>
+      <div>
+        <h3 style="margin-bottom:1rem;">楊明怡 NIKKI</h3>
+        <div class="speaker-bio-item">修習人類圖超過 15 年</div>
+        <div class="speaker-bio-item">擅長將抽象系統轉化為可操作的日常工具</div>
+        <div class="speaker-bio-item">協助個人與團隊提升自我覺察、溝通效率與決策品質</div>
+        <div class="speaker-bio-item">以互動式與體驗式教學，引導學員將人類圖落實於日常與職場應用</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. FAQ -->
+<section id="faq" style="background:#fff;">
+  <div class="container-tight">
+    <h2>常見問題</h2>
+    <div style="margin-top:1.5rem;">
+      <details class="faq-item">
+        <summary>我完全不懂人類圖，這份說明書適合我嗎？</summary>
+        <p class="faq-answer">非常適合。這份說明書就是為「剛聽過人類圖、不知道從哪開始」的人設計的，不需要任何基礎，打開就能用。</p>
+      </details>
+      <details class="faq-item">
+        <summary>跟 YouTube 免費影片有什麼不一樣？</summary>
+        <p class="faq-answer">影片會教你「懂」人類圖，這份說明書教你「用」它。內容聚焦在你今天就能做的事，不是又一堆術語解釋。</p>
+      </details>
+      <details class="faq-item">
+        <summary>只有 10 頁，內容夠嗎？</summary>
+        <p class="faq-answer">夠。這份刻意做得精簡，因為大多數人買了厚厚一本反而看不完。10 頁全部是重點，沒有廢話。</p>
+      </details>
+      <details class="faq-item">
+        <summary>買了怎麼拿到？</summary>
+        <p class="faq-answer">付款完成後會收到下載連結，PDF 格式，手機平板電腦都可以打開。</p>
+      </details>
+      <details class="faq-item">
+        <summary>我需要先去查自己的人類圖嗎？</summary>
+        <p class="faq-answer">需要，但很簡單。書裡會告訴你去哪裡免費查（不用付費），5 分鐘內就能拿到你的圖。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Countdown Sticky -->
+<div id="countdown-sticky" data-deadline="2026-06-07T23:59:00+08:00" data-onzero="ended-state">
+  <span class="sticky-label">早鳥價倒數 <strong class="time"></strong></span>
+  <a class="cta-compact" href="#">我要這份說明書 →</a>
+</div>
+
+<!-- Nav scroll script -->
+<script>
+  (function () {
+    var nav = document.getElementById('siteNav');
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+  })();
+</script>
+
+<!-- Countdown JS -->
+<script>
+(function () {
+  'use strict';
+  var bigEl    = document.getElementById('countdown-big');
+  var stickyEl = document.getElementById('countdown-sticky');
+  var heroEl   = document.getElementById('hero');
+  if (!bigEl && !stickyEl) return;
+  var deadlineStr = (bigEl || stickyEl).getAttribute('data-deadline');
+  var onZero      = (bigEl || stickyEl).getAttribute('data-onzero') || 'ended-state';
+  var deadline    = new Date(deadlineStr).getTime();
+  if (isNaN(deadline)) { console.warn('[countdown] invalid deadline:', deadlineStr); return; }
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function tick() {
+    var now  = Date.now();
+    var diff = deadline - now;
+    if (diff <= 0) { handleZero(); return false; }
+    var days  = Math.floor(diff / 86400000);
+    var hours = Math.floor((diff % 86400000) / 3600000);
+    var mins  = Math.floor((diff % 3600000) / 60000);
+    var secs  = Math.floor((diff % 60000) / 1000);
+    if (bigEl) {
+      var units = { days: days, hours: hours, mins: mins, secs: secs };
+      bigEl.querySelectorAll('[data-unit]').forEach(function (el) {
+        el.textContent = pad(units[el.dataset.unit] || 0);
+      });
+    }
+    if (stickyEl) {
+      var timeEl = stickyEl.querySelector('.time');
+      if (timeEl) timeEl.textContent = days + '天 ' + pad(hours) + ':' + pad(mins) + ':' + pad(secs);
+    }
+    return true;
+  }
+  function handleZero() {
+    var msg = '<div style="text-align:center;opacity:0.6;padding:1rem;">早鳥優惠已結束</div>';
+    if (bigEl) bigEl.innerHTML = msg;
+    if (stickyEl) {
+      stickyEl.innerHTML = '<span style="width:100%;text-align:center;">早鳥優惠已結束</span>';
+      stickyEl.classList.add('visible');
+    }
+  }
+  if (heroEl && stickyEl) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        stickyEl.classList.toggle('visible', !entry.isIntersecting);
+      });
+    }, { threshold: 0 });
+    observer.observe(heroEl);
+  }
+  if (tick()) {
+    var interval = setInterval(function () {
+      if (!tick()) clearInterval(interval);
+    }, 1000);
+  }
+})();
+</script>
+
+</body>
+</html>

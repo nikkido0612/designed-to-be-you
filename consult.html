@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人類圖 × 教練陪跑 一對一諮詢 — Designed to be YOU</title>
+  <meta name="description" content="20 年教練陪跑經驗，加上人類圖的整合能力，陪你在卡住的決定上，用真正的自己做出選擇。">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-primary: #3B2F2F;
+      --color-cta:     #C9A87C;
+      --color-text:    #2D2A28;
+      --color-bg:      #FAF7F2;
+      --color-muted:   rgba(45,42,40,0.55);
+      --color-border:  rgba(45,42,40,0.12);
+      --font-headline: 'Noto Serif TC', serif;
+      --font-body:     'Noto Sans TC', sans-serif;
+      --transition:    250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-soft:   0 4px 12px rgba(0,0,0,0.06);
+      --shadow-hover:  0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    h1, h2, h3 { font-family: var(--font-headline) !important; font-weight: 700 !important; line-height: 1.35; }
+    h1 { font-size: clamp(1.7rem, 4.5vw, 2.75rem) !important; }
+    h2 { font-size: clamp(1.4rem, 3.5vw, 2.1rem) !important; margin-bottom: 1rem; }
+    h3 { font-size: 1.2rem !important; margin-bottom: 0.75rem; }
+
+    .container-tight { max-width: 672px; margin: 0 auto; padding: 0 1.5rem; }
+    .container-wide  { max-width: 896px; margin: 0 auto; padding: 0 1.5rem; }
+
+    section { padding: 4rem 0; }
+    @media (min-width: 768px) { section { padding: 6rem 0; } }
+    #hero { padding: 7rem 0 5rem; }
+    @media (min-width: 768px) { #hero { padding: 9rem 0 6rem; } }
+
+    /* ===== Nav ===== */
+    #siteNav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    #siteNav.scrolled { border-color: var(--color-border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .nav-inner { max-width: 1024px; margin: 0 auto; padding: 0 1.5rem; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+    .nav-brand { font-family: var(--font-headline); font-weight: 700; font-size: 1rem; color: var(--color-primary); text-decoration: none; white-space: nowrap; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { font-size: 0.875rem; color: var(--color-text); text-decoration: none; opacity: 0.7; transition: opacity var(--transition); }
+    .nav-links a:hover { opacity: 1; }
+    @media (max-width: 860px) { .nav-links { display: none; } }
+    .nav-cta { background: var(--color-cta); color: #fff; padding: 0.45rem 1.1rem; border-radius: 6px; font-size: 0.875rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: opacity var(--transition); }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ===== CTA Button ===== */
+    .cta-primary {
+      display: inline-block; background: var(--color-cta); color: #fff;
+      padding: 1rem 2rem; border-radius: 8px; font-weight: 600; font-size: 1.05rem;
+      text-decoration: none; cursor: pointer; transition: all var(--transition);
+      box-shadow: var(--shadow-soft); border: none;
+    }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .cta-primary:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+    #hook   { background: rgba(59,47,47,0.03); }
+    #speaker { background: rgba(59,47,47,0.03); }
+
+    .pain-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 1.25rem; background: #fff; border-radius: 10px; border: 1px solid var(--color-border); margin-bottom: 0.75rem; box-shadow: var(--shadow-soft); }
+    .pain-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
+
+    .step-card { background: #fff; border: 1px solid var(--color-border); border-radius: 14px; padding: 2rem; box-shadow: var(--shadow-soft); }
+    .step-tag { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; color: var(--color-cta); text-transform: uppercase; margin-bottom: 0.75rem; }
+
+    .pricing-card { background: #fff; border: 1px solid var(--color-border); border-radius: 14px; padding: 2rem; box-shadow: var(--shadow-soft); transition: all var(--transition); }
+    .pricing-card.highlighted { border: 2px solid var(--color-cta); box-shadow: 0 8px 32px rgba(201,168,124,0.18); }
+    .pricing-plan { font-size: 0.95rem; font-weight: 700; letter-spacing: 1px; color: var(--color-primary); margin-bottom: 0.5rem; }
+    .pricing-price { font-size: 2rem; font-weight: 700; color: var(--color-primary); font-family: var(--font-headline); }
+    .pricing-note { font-size: 0.875rem; color: var(--color-muted); margin-top: 0.5rem; }
+    .pricing-flow-item { display: flex; gap: 0.6rem; align-items: flex-start; margin: 0.6rem 0; font-size: 0.925rem; }
+    .pricing-flow-item::before { content: "→"; color: var(--color-cta); flex-shrink: 0; }
+
+    .founder-box { background: rgba(201,168,124,0.12); border: 1px solid var(--color-cta); border-radius: 12px; padding: 1.5rem; margin-top: 2rem; }
+
+    .speaker-card { display: flex; gap: 2rem; align-items: flex-start; }
+    @media (max-width: 640px) { .speaker-card { flex-direction: column; align-items: center; text-align: center; } }
+    .speaker-avatar { width: 112px; height: 112px; border-radius: 50%; background: rgba(59,47,47,0.1); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-family: var(--font-headline); color: var(--color-primary); font-weight: 700; }
+    .speaker-bio-item { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.5rem; font-size: 0.95rem; }
+    .speaker-bio-item::before { content: "—"; color: var(--color-cta); flex-shrink: 0; }
+
+    details.faq-item { border-bottom: 1px solid var(--color-border); }
+    details.faq-item summary { cursor: pointer; font-weight: 600; padding: 1.1rem 0; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 1rem; }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary::after { content: "+"; font-size: 1.4rem; color: var(--color-cta); flex-shrink: 0; transition: transform var(--transition); }
+    details.faq-item[open] summary::after { transform: rotate(45deg); }
+    details.faq-item .faq-answer { padding: 0 0 1.25rem; color: var(--color-muted); line-height: 1.75; }
+
+    #cta-final { background: var(--color-primary); color: #FAF7F2; }
+    #cta-final h2 { color: #FAF7F2; }
+    #cta-final p { color: rgba(250,247,242,0.72); }
+
+    /* ===== Form ===== */
+    .field-label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--color-primary); }
+    .field-input {
+      width: 100%; padding: 0.75rem 1rem; font-size: 0.975rem; font-family: inherit;
+      border: 1px solid var(--color-border); border-radius: 8px; background: #fff; color: var(--color-text);
+      transition: border-color var(--transition); box-sizing: border-box;
+    }
+    .field-input:focus { outline: none; border-color: var(--color-cta); }
+    .field-block { margin-bottom: 1.5rem; }
+    .form-card { background: #fff; border: 1px solid var(--color-border); border-radius: 14px; padding: 2rem; box-shadow: var(--shadow-soft); }
+    .err-msg { font-size: 0.85rem; color: #B5453F; margin-top: 1rem; display: none; }
+    .thanks-box { text-align: center; padding: 2rem 0; }
+    .contact-card { background: rgba(59,47,47,0.04); border-radius: 10px; padding: 1.25rem; margin-top: 1.5rem; display: inline-block; }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<nav id="siteNav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">Designed to be YOU</a>
+    <ul class="nav-links">
+      <li><a href="#what">能為你做什麼</a></li>
+      <li><a href="#plans">方案與價格</a></li>
+      <li><a href="#speaker">帶領者</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-cta" href="#book">立即預約</a>
+  </div>
+</nav>
+
+<a id="top"></a>
+
+<!-- 1. Hero -->
+<section id="hero">
+  <div class="container-tight" style="text-align:center;">
+    <p style="font-size:0.875rem;letter-spacing:2px;text-transform:uppercase;color:var(--color-muted);margin-bottom:1.25rem;">人類圖 × 教練陪跑・一對一諮詢</p>
+    <h1>很多人都渴望做自己，<br>但真正的自己是什麼樣子？</h1>
+    <p style="font-size:1.05rem;color:var(--color-muted);margin:1.5rem 0 0;max-width:520px;margin-left:auto;margin-right:auto;">你以為的自己，是社會堆出來的標準，是原生家庭教出來的制約，還是你渴望成為的那個人——又或者，只是活成了別人期望下的那個人？這些「自己」，離你真正的自己，可能越來越遠。</p>
+    <a class="cta-primary" href="#book" style="margin-top:2.5rem;">預約一次深度解讀</a>
+  </div>
+</section>
+
+<!-- 2. 人類圖能為你做什麼 -->
+<section id="what" style="background:#fff;">
+  <div class="container-tight">
+    <h2>人類圖能為你做什麼？</h2>
+    <p>它幫助你用「自己」的方式做決定。</p>
+    <p>整個生命的總和，就是由一連串的決定組成——回頭看你的人生，會發現它就是一路上各種決定累積出來的結果。</p>
+    <p>但我們存在的本質是開放的：天生就會與外在環境互動、受他人影響、彼此吸引，也彼此制約。正因為如此，「用真正的自己做決定」這件事，幾乎沒有人真正練習過。</p>
+    <p style="font-weight:600;color:var(--color-primary);">簡單地說，人類圖給你一個方法，讓你能做出真正對你有效的決定。</p>
+  </div>
+</section>
+
+<!-- 3. 兩步驟 -->
+<section id="steps">
+  <div class="container-wide">
+    <h2 style="text-align:center;">從認識自己，到真正用出來</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;">
+      <div class="step-card">
+        <span class="step-tag">第一步</span>
+        <h3>認識自己</h3>
+        <p style="font-size:0.975rem;">人類圖的知識很廣：類型、通道、閘門、內在權威、人生角色……每一塊都是拼圖的一部分。單獨看一個名詞不會懂，但當這些拼圖被專業地整合起來，你會第一次清楚看到自己天生怎麼做決定最準——不是社會標準教你的方式，也不是別人期望你用的方式，是你本來的方式。</p>
+      </div>
+      <div class="step-card">
+        <span class="step-tag">第二步</span>
+        <h3>陪跑</h3>
+        <p style="font-size:0.975rem;">但知道「方法」，不代表你在真實生活裡用得出來。那個「我不夠好」的念頭，還是會在你要做決定的當下跳出來——這時候需要的不是再解讀一次盤面，是有人能在你說話的當下，精準聽出這句話是哪裡來的雜音。20 年教練訓練出來的耳朵，加上人類圖的整合能力，讓我能陪你把第一步認識到的自己，真正用在你正卡住的決定上。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. 具體成果 / Hook -->
+<section id="hook">
+  <div class="container-tight">
+    <h2>這些情境，聽起來熟悉嗎？</h2>
+    <div style="margin-top:1.5rem;">
+      <div class="pain-item"><span class="pain-icon">💼</span><span>工作上很努力，也賺到了錢，可是心裡總覺得少了什麼</span></div>
+      <div class="pain-item"><span class="pain-icon">🌀</span><span>工作一直不開心，很想換，卻又怕換了還是找不到自己喜歡的</span></div>
+      <div class="pain-item"><span class="pain-icon">💬</span><span>關係裡一直忍耐，說不清楚為什麼，也不知道該堅持還是放手</span></div>
+    </div>
+    <p style="margin-top:2rem;font-size:1.05rem;">近千個個案陪跑下來，我看到同一件事反覆發生：背後常常是同一個雜音在作祟。認識自己是第一步，用真正的自己做決定，才是你走向天賦的開始。</p>
+  </div>
+</section>
+
+<!-- 5. 方案與價格 -->
+<section id="plans" style="background:#fff;">
+  <div class="container-wide">
+    <h2 style="text-align:center;">方案與價格</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;max-width:760px;margin-left:auto;margin-right:auto;">
+
+      <div class="pricing-card highlighted">
+        <p class="pricing-plan">方案一・單次深度解讀</p>
+        <p class="pricing-price">NT$3,200<span style="font-size:1rem;font-weight:400;color:var(--color-muted);">–4,000</span></p>
+        <p class="pricing-note">1.5 小時・線上或實體皆可</p>
+        <div style="margin-top:1.25rem;">
+          <div class="pricing-flow-item">開場釐清這次帶著什麼卡住的決定而來</div>
+          <div class="pricing-flow-item">完整解讀類型、內在權威、能量中心、關鍵閘門通道</div>
+          <div class="pricing-flow-item">收斂回你的困惑，釐清「用你的方式該怎麼判斷」</div>
+          <div class="pricing-flow-item">解讀後提供一頁重點筆記</div>
+        </div>
+        <a class="cta-primary" href="#book" style="margin-top:1.5rem;display:block;text-align:center;">預約這個方案</a>
+      </div>
+
+      <div class="pricing-card">
+        <p class="pricing-plan">方案二・教練陪跑（核心期）</p>
+        <p class="pricing-price">NT$8,000<span style="font-size:1rem;font-weight:400;color:var(--color-muted);">–8,800</span></p>
+        <p class="pricing-note">4 次・每次 1 小時・每週一次，約 1 個月</p>
+        <div style="margin-top:1.25rem;">
+          <div class="pricing-flow-item">第 1 次：釐清這個月要處理的具體情境</div>
+          <div class="pricing-flow-item">第 2-3 次：陪你在真實情境裡練習分辨</div>
+          <div class="pricing-flow-item">第 4 次：檢視進展，決定要不要加購延伸期</div>
+        </div>
+        <p style="font-size:0.85rem;color:var(--color-muted);margin-top:1.25rem;">* 需先完成方案一單次解讀，才能報名這個方案</p>
+      </div>
+
+    </div>
+
+    <div class="founder-box container-tight" style="max-width:600px;">
+      <p style="font-weight:700;color:var(--color-primary);margin-bottom:0.5rem;">🌱 創始個案優惠</p>
+      <p style="font-size:0.925rem;margin:0;">這是全新服務，前 5-10 位個案享有創始優惠（別價或加送一次對話），交換你使用後的心得分享。額滿為止。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Speaker -->
+<section id="speaker">
+  <div class="container-tight">
+    <h2>帶領者</h2>
+    <div class="speaker-card" style="margin-top:1.5rem;">
+      <div class="speaker-avatar">楊</div>
+      <div>
+        <h3 style="margin-bottom:1rem;">楊明怡 NIKKI</h3>
+        <div class="speaker-bio-item">修習人類圖超過 15 年</div>
+        <div class="speaker-bio-item">20 年生命教練經驗，陪跑近千位個案</div>
+        <div class="speaker-bio-item">擅長將抽象系統轉化為可操作的日常工具</div>
+        <div class="speaker-bio-item">用精準的聆聽，陪你在真實情境裡分辨「這是真的你，還是制約的雜音」</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. FAQ -->
+<section id="faq" style="background:#fff;">
+  <div class="container-tight">
+    <h2>常見問題</h2>
+    <div style="margin-top:1.5rem;">
+      <details class="faq-item">
+        <summary>我完全不懂人類圖，適合預約嗎？</summary>
+        <p class="faq-answer">適合。單次解讀會先從你帶來的困惑開始，再完整解讀你的設計，不需要任何基礎。</p>
+      </details>
+      <details class="faq-item">
+        <summary>可以直接報名方案二（教練陪跑）嗎？</summary>
+        <p class="faq-answer">需要先完成方案一的單次深度解讀，才能報名方案二。這是為了確保陪跑時，我們有共同的設計圖基礎可以對話。</p>
+      </details>
+      <details class="faq-item">
+        <summary>陪跑核心期 4 次結束後一定要繼續嗎？</summary>
+        <p class="faq-answer">不用。第 4 次會一起檢視進展，你可以決定要不要加購延伸期，沒有強制續約。</p>
+      </details>
+      <details class="faq-item">
+        <summary>這是心理諮商或醫療服務嗎？</summary>
+        <p class="faq-answer">不是。這是人類圖解讀加上教練陪伴，幫助你釐清決定、看懂自己的設計，不能取代醫療或心理治療。如果你正在經歷需要專業醫療協助的狀況，建議優先尋求相關專業協助。</p>
+      </details>
+      <details class="faq-item">
+        <summary>預約後多久會收到回覆？</summary>
+        <p class="faq-answer">送出預約表單後，我會主動透過 LINE 與你聯繫，確認時間。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Final CTA -->
+<section id="cta-final">
+  <div class="container-tight" style="text-align:center;">
+    <h2>準備好看清楚卡住你的那個決定了嗎？</h2>
+    <p style="font-size:1.05rem;margin:1rem 0 2rem;">從一次深度解讀開始，看懂自己天生怎麼做決定最準。</p>
+    <a class="cta-primary" href="#book" style="background:#fff;color:var(--color-primary);">立即預約</a>
+  </div>
+</section>
+
+<!-- 9. 預約表單 -->
+<section id="book">
+  <div class="container-tight">
+    <h2 style="text-align:center;">預約單次深度解讀</h2>
+    <p style="text-align:center;color:var(--color-muted);margin-bottom:2rem;">填寫以下資料，我會主動透過 LINE 與你聯繫確認時間</p>
+
+    <div class="form-card">
+      <form id="bookForm" name="book">
+        <p style="position:absolute;left:-9999px" aria-hidden="true"><label>不要填寫這格 <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+        <div class="field-block">
+          <label class="field-label">姓名 *</label>
+          <input class="field-input" type="text" name="姓名" required>
+        </div>
+        <div class="field-block">
+          <label class="field-label">電話 *</label>
+          <input class="field-input" type="tel" name="電話" required>
+        </div>
+        <div class="field-block">
+          <label class="field-label">LINE 帳號 *</label>
+          <input class="field-input" type="text" name="LINE帳號" required>
+        </div>
+        <div class="field-block">
+          <label class="field-label">Email *</label>
+          <input class="field-input" type="email" name="Email" required>
+        </div>
+        <div class="field-block">
+          <label class="field-label">這次帶著什麼卡住的決定或困惑而來？</label>
+          <textarea class="field-input" name="困惑或決定" rows="3" placeholder="不用寫得很完整，簡單描述就好"></textarea>
+        </div>
+
+        <div style="text-align:center;margin-top:2rem;">
+          <button type="submit" id="submitBtn" class="cta-primary">送出預約</button>
+          <p id="errMsg" class="err-msg">請完整填寫所有必填欄位（標示 *）後再送出。</p>
+        </div>
+      </form>
+
+      <div id="thanksBox" style="display:none;" class="thanks-box">
+        <h3>預約已送出 🌱</h3>
+        <p style="color:var(--color-muted);">感謝你的預約！我會主動透過 LINE 與你聯繫，確認時間。</p>
+        <div class="contact-card">
+          <p style="margin:0;font-weight:600;">楊明怡 NIKKI　LINE：nikkido0612</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:2.5rem 0;text-align:center;background:var(--color-primary);">
+  <p style="font-size:0.8rem;color:rgba(250,247,242,0.6);margin:0;">© 2026 Designed to be YOU</p>
+</footer>
+
+<!-- Nav scroll script -->
+<script>
+  (function () {
+    var nav = document.getElementById('siteNav');
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+  })();
+</script>
+
+<!-- Booking form submit -->
+<script>
+  var APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+  document.getElementById('bookForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target;
+
+    if (f.querySelector('input[name="bot-field"]').value) { return; }
+
+    if (!f.checkValidity()) {
+      document.getElementById('errMsg').style.display = 'block';
+      f.reportValidity();
+      return;
+    }
+    document.getElementById('errMsg').style.display = 'none';
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '送出中…';
+
+    var formData = new FormData(f);
+    var data = {};
+    formData.forEach(function (value, key) { if (key !== 'bot-field') data[key] = value; });
+
+    var submissionId = 'web-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ id: submissionId, data: data })
+    })
+    .then(function () {
+      document.getElementById('bookForm').style.display = 'none';
+      document.getElementById('thanksBox').style.display = 'block';
+    })
+    .catch(function () {
+      btn.disabled = false;
+      btn.textContent = '送出預約';
+      var err = document.getElementById('errMsg');
+      err.textContent = '送出失敗，請檢查網路連線後再試一次，或直接透過 LINE 聯絡（nikkido0612）。';
+      err.style.display = 'block';
+    });
+  });
+</script>
+
+</body>
+</html>
