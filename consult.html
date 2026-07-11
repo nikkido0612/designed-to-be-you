@@ -52,14 +52,17 @@
     section { padding: 4rem 0; }
     @media (min-width: 768px) { section { padding: 6rem 0; } }
     #hero {
-      padding: 7rem 0 4rem;
+      padding: 8rem 0 5rem;
       position: relative;
       overflow: hidden;
-      background:
-        linear-gradient(rgba(46,58,69,0.72), rgba(46,58,69,0.8)),
-        url('hero.jpg') center 30% / cover no-repeat;
+      background: url('hero.jpg') center 30% / cover no-repeat;
     }
-    @media (min-width: 768px) { #hero { padding: 10rem 0 6rem; } }
+    #hero::before {
+      content: ""; position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(rgba(0,0,0,0.22), rgba(0,0,0,0.38));
+    }
+    @media (min-width: 768px) { #hero { padding: 11rem 0 7rem; } }
+    #hero h1, #hero p { text-shadow: 0 2px 10px rgba(0,0,0,0.35); }
     #hero .container-tight { position: relative; z-index: 1; }
 
     .blob-accent { position: relative; overflow: hidden; }
@@ -196,21 +199,26 @@
 
 <a id="top"></a>
 
-<!-- 1. Hero + 痛點（合併，痛點提前） -->
+<!-- 1. Hero（純照片 + 開場文字） -->
 <section id="hero">
   <div class="container-tight" style="text-align:center;">
     <p style="display:inline-block;font-size:0.8rem;letter-spacing:1.5px;text-transform:uppercase;color:#fff;font-weight:700;margin-bottom:1.5rem;padding:0.4rem 1rem;border-radius:999px;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.4);">人類圖 × 教練陪跑・一對一諮詢</p>
     <h1 style="color:#fff;">很多人都渴望做自己，<br>但<span style="color:#E8C874;">真正的自己</span>是什麼樣子？</h1>
-    <p style="font-size:1.05rem;color:rgba(255,255,255,0.85);margin:1.5rem 0 0;max-width:480px;margin-left:auto;margin-right:auto;">社會的標準。原生家庭的制約。你努力想活成的那個人。<br>這些都不是你——但你可能分不出來，哪個才是。</p>
+    <p style="font-size:1.05rem;color:rgba(255,255,255,0.92);margin:1.5rem 0 0;max-width:480px;margin-left:auto;margin-right:auto;">社會的標準。原生家庭的制約。你努力想活成的那個人。<br>這些都不是你——但你可能分不出來，哪個才是。</p>
+  </div>
+</section>
 
-    <div style="margin-top:2.5rem;max-width:480px;margin-left:auto;margin-right:auto;">
+<!-- 1.5 痛點 + CTA -->
+<section id="hook" style="background:#fff;">
+  <div class="container-tight" style="text-align:center;">
+    <div style="max-width:480px;margin-left:auto;margin-right:auto;">
       <div class="pain-item"><span class="pain-icon">💼</span><span>工作上很努力，也賺到了錢，可是心裡總覺得少了什麼</span></div>
       <div class="pain-item"><span class="pain-icon">🌀</span><span>工作一直不開心，很想換，卻又怕換了還是找不到自己喜歡的</span></div>
       <div class="pain-item"><span class="pain-icon">💬</span><span>關係裡一直忍耐，說不清楚為什麼，也不知道該堅持還是放手</span></div>
     </div>
 
     <a class="cta-primary" href="#book" style="margin-top:2rem;">預約一次深度解讀</a>
-    <p style="margin-top:1rem;"><a href="https://line.me/ti/p/~nikkido0612" target="_blank" rel="noopener" style="font-size:0.9rem;color:rgba(255,255,255,0.8);text-decoration:underline;">還沒準備好？先加 LINE 聊聊</a></p>
+    <p style="margin-top:1rem;"><a href="https://line.me/ti/p/~nikkido0612" target="_blank" rel="noopener" style="font-size:0.9rem;color:var(--color-muted);text-decoration:underline;">還沒準備好？先加 LINE 聊聊</a></p>
   </div>
 </section>
 
