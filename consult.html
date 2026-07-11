@@ -18,6 +18,9 @@
       --color-cta:     #7289AD;
       --color-cta-hover: #5D75A0;
       --color-sage:    #7C9473;
+      --color-teal:    #009E82;
+      --color-orange:  #D9822B;
+      --color-gold:    #C99A2E;
       --color-text:    #333333;
       --color-bg:      #FAF8F4;
       --color-muted:   rgba(51,51,51,0.6);
@@ -103,13 +106,13 @@
     .cta-primary:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
     #hook   { background: rgba(59,47,47,0.03); }
-    #speaker { background: rgba(59,47,47,0.03); }
+    #speaker { background: rgba(114,137,173,0.07); }
 
     .pain-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 1.25rem; background: #fff; border-radius: 18px; border: 1px solid var(--color-border); margin-bottom: 0.75rem; box-shadow: var(--shadow-soft); text-align: left; }
     .pain-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
 
     .step-card { background: #fff; border: 1px solid var(--color-border); border-radius: 22px; padding: 2rem; box-shadow: var(--shadow-soft); }
-    .step-tag { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; color: var(--color-cta); text-transform: uppercase; margin-bottom: 0.75rem; }
+    .step-tag { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; color: var(--color-orange); text-transform: uppercase; margin-bottom: 0.75rem; }
 
     .pricing-card { background: #fff; border: 1px solid var(--color-border); border-radius: 22px; padding: 2rem; box-shadow: var(--shadow-soft); transition: all var(--transition); }
     .pricing-card.highlighted { border: 2px solid var(--color-cta); box-shadow: 0 8px 32px rgba(114,137,173,0.18); }
@@ -122,7 +125,7 @@
 
     .outcome-item { display: flex; gap: 0.75rem; align-items: flex-start; padding: 1rem 0; border-bottom: 1px solid var(--color-border); font-size: 0.975rem; }
     .outcome-item:last-child { border-bottom: none; }
-    .outcome-check { color: var(--color-cta); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
+    .outcome-check { color: var(--color-gold); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; }
 
     .fit-item { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.7rem; font-size: 0.95rem; }
     .fit-check { color: #4A7A4A; font-weight: 700; flex-shrink: 0; }
@@ -237,12 +240,12 @@
 <!-- 2.5 人類圖是什麼 -->
 <section id="whatis" style="background:#fff;">
   <div class="container-tight">
-    <div style="background:rgba(124,148,115,0.10); border:1px solid rgba(124,148,115,0.28); border-radius:24px; padding:2.5rem;">
-      <h2>人類圖是什麼？</h2>
+    <div style="background:rgba(0,158,130,0.08); border:1px solid rgba(0,158,130,0.26); border-radius:24px; padding:2.5rem;">
+      <h2 style="color:var(--color-teal);">人類圖是什麼？</h2>
       <p>簡單來說，就是一張專屬於你的人生使用說明書！</p>
       <p>每一個人都有不同的設計，有不同的天賦才華及固定運作的模式，同時也有開放被外界影響的不同課題。</p>
       <p>從這些課題中可以累積人生的智慧，進而完成每一個人的不同使命！</p>
-      <blockquote style="border-left:4px solid var(--color-sage); margin:1.5rem 0 0; padding-left:1.25rem; font-weight:600; color:var(--color-primary);">透過了解自己可以做出正確的選擇，如果理解他人，更能夠建立美好的關係。</blockquote>
+      <blockquote style="border-left:4px solid var(--color-teal); margin:1.5rem 0 0; padding-left:1.25rem; font-weight:600; color:var(--color-primary);">透過了解自己可以做出正確的選擇，如果理解他人，更能夠建立美好的關係。</blockquote>
     </div>
   </div>
 </section>
@@ -333,7 +336,7 @@
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;max-width:760px;margin-left:auto;margin-right:auto;">
 
       <div class="pricing-card highlighted" style="position:relative;">
-        <span style="position:absolute; top:-14px; left:2rem; background:var(--color-cta); color:#fff; font-size:0.75rem; font-weight:700; padding:0.3rem 0.9rem; border-radius:999px; box-shadow:var(--shadow-soft);">入門首選</span>
+        <span style="position:absolute; top:-14px; left:2rem; background:var(--color-orange); color:#fff; font-size:0.75rem; font-weight:700; padding:0.3rem 0.9rem; border-radius:999px; box-shadow:var(--shadow-soft);">入門首選</span>
         <p class="pricing-plan">方案一・單次深度解讀</p>
         <p><span class="pricing-price-old">NT$4,500</span><span class="pricing-price">NT$3,600</span></p>
         <p class="pricing-note">1.5 小時・線上或實體皆可</p>
@@ -363,7 +366,7 @@
 </section>
 
 <!-- 7. FAQ -->
-<section id="faq" style="background:#fff;">
+<section id="faq" style="background:rgba(51,51,51,0.035);">
   <div class="container-tight">
     <h2>常見問題</h2>
     <div style="margin-top:1.5rem;">
