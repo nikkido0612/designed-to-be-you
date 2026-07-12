@@ -164,7 +164,8 @@
 
     .speaker-card { display: flex; gap: 2rem; align-items: flex-start; }
     @media (max-width: 640px) { .speaker-card { flex-direction: column; align-items: center; text-align: center; } }
-    .speaker-avatar { width: 112px; height: 112px; border-radius: 50%; background: rgba(59,47,47,0.1); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-family: var(--font-headline); color: var(--color-primary); font-weight: 700; }
+    .speaker-avatar { width: 60px; height: 60px; border-radius: 50%; background: rgba(114,137,173,0.12); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .speaker-avatar svg { width: 26px; height: 26px; }
     .speaker-bio-item { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.5rem; font-size: 0.95rem; }
     .speaker-bio-item::before { content: "—"; color: var(--color-cta); flex-shrink: 0; }
     .speaker-stat-row { display: flex; gap: 2rem; margin-top: 1.5rem; }
@@ -206,7 +207,7 @@
 <!-- ===== Nav ===== -->
 <nav id="siteNav">
   <div class="nav-inner">
-    <a class="nav-brand" href="index.html" style="display:flex;align-items:center;gap:0.6rem;"><img src="logo.png" alt="" style="width:40px;height:40px;">Designed to be YOU</a>
+    <a class="nav-brand" href="index.html" style="display:flex;align-items:center;gap:0.6rem;"><img src="logo.png" alt="" style="width:40px;height:40px;">人類圖諮詢</a>
     <ul class="nav-links">
       <li><a href="#speaker">帶領者</a></li>
       <li><a href="#plans">方案與價格</a></li>
@@ -221,7 +222,7 @@
 <!-- 1. Hero（純照片 + 開場文字） -->
 <section id="hero">
   <div class="container-tight" style="text-align:center;">
-    <p style="display:inline-block;font-size:0.8rem;letter-spacing:1.5px;text-transform:uppercase;color:#fff;font-weight:700;margin-bottom:1.5rem;padding:0.4rem 1rem;border-radius:999px;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.4);">人類圖 X 個人解析 X 伴侶諮詢 X 親子關係</p>
+    <p style="display:inline-block;font-size:0.8rem;letter-spacing:1.5px;text-transform:uppercase;color:#fff;font-weight:700;margin-bottom:1.5rem;padding:0.4rem 1rem;border-radius:999px;background:rgba(255,255,255,0.16);border:1px solid rgba(255,255,255,0.4);">人類圖 X 個人解析 X 伴侶諮詢</p>
     <h1 style="color:#fff;">很多人都渴望做自己，<br>但<span style="color:#E8C874;">真正的自己</span>是什麼樣子？</h1>
     <p style="font-size:1.05rem;color:rgba(255,255,255,0.92);margin:1.5rem 0 0;max-width:480px;margin-left:auto;margin-right:auto;">社會的標準。原生家庭的制約。你努力想活成的那個人。<br>這些都不是你——但你可能分不出來，哪個才是。</p>
   </div>
@@ -269,9 +270,11 @@
 <!-- 2. Speaker（信任狀提前） -->
 <section id="speaker">
   <div class="container-tight">
-    <h2>帶領者</h2>
+    <h2>關於諮詢師</h2>
     <div class="speaker-card" style="margin-top:1.5rem;">
-      <div class="speaker-avatar">楊</div>
+      <div class="speaker-avatar">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" stroke="var(--color-primary)" stroke-width="1.6"/><path d="M4 20c0-3.5 3.5-6 8-6s8 2.5 8 6" stroke="var(--color-primary)" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
       <div>
         <h3 style="margin-bottom:0.25rem;">楊明怡 Nikki</h3>
         <p style="font-size:0.875rem;color:var(--color-muted);margin:0 0 1rem;">IHDS 國際人類圖學院一階引導師・體驗式課程認證講師</p>
@@ -281,7 +284,7 @@
         <div class="speaker-bio-item">以互動式與體驗式教學，引導學員將人類圖落實於日常與職場應用</div>
         <div class="speaker-stat-row">
           <div class="speaker-stat"><div class="num">20 年</div><div class="label">生命教練經驗</div></div>
-          <div class="speaker-stat"><div class="num">近千位</div><div class="label">陪跑個案</div></div>
+          <div class="speaker-stat"><div class="num">近千名</div><div class="label">陪伴個案</div></div>
         </div>
       </div>
     </div>
@@ -352,12 +355,14 @@
 <!-- 4.5 成效承諾 -->
 <section id="outcomes" class="blob-accent" style="background:#fff;">
   <div class="container-tight">
-    <h2 style="text-align:center;">做完之後，你會帶走什麼？</h2>
-    <div style="margin-top:2rem;">
-      <div class="outcome-item"><span class="outcome-check">✦</span><span>分得出哪些念頭是你，哪些是雜音</span></div>
-      <div class="outcome-item"><span class="outcome-check">✦</span><span>知道自己天生怎麼做決定最準，不用再靠猜的</span></div>
-      <div class="outcome-item"><span class="outcome-check">✦</span><span>那個卡住很久的決定，終於能往前走</span></div>
-      <div class="outcome-item"><span class="outcome-check">✦</span><span>下次雜音再出現，你知道怎麼應對，不用每次都從頭來過</span></div>
+    <p style="font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--color-muted);font-weight:700;margin-bottom:0.5rem;">做完之後你可以帶走什麼？</p>
+    <p>我們會從你目前的困擾出發，深入理解你的決策方式、行動模式，以及在工作、關係與生活中反覆卡住的原因。</p>
+    <p style="font-weight:600;">你會更清楚：</p>
+    <div style="margin-top:1rem;">
+      <div class="outcome-item"><span class="outcome-check">✦</span><span>什麼適合你，什麼正在消耗你</span></div>
+      <div class="outcome-item"><span class="outcome-check">✦</span><span>為什麼總在相似的問題裡打轉</span></div>
+      <div class="outcome-item"><span class="outcome-check">✦</span><span>面對選擇時，如何做出更適合自己的決定</span></div>
+      <div class="outcome-item"><span class="outcome-check">✦</span><span>接下來可以從哪裡開始調整</span></div>
     </div>
   </div>
 </section>
