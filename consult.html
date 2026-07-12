@@ -174,6 +174,9 @@
     .speaker-stat .num { font-family: var(--font-headline); font-size: 1.75rem; font-weight: 700; color: var(--color-cta); }
     .speaker-stat .label { font-size: 0.8rem; color: var(--color-muted); }
 
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 480px; } }
+
     details.faq-item { border-bottom: 1px solid var(--color-border); }
     details.faq-item summary { cursor: pointer; font-weight: 600; padding: 1.1rem 0; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 1rem; }
     details.faq-item summary::-webkit-details-marker { display: none; }
@@ -406,7 +409,7 @@
 <section id="plans">
   <div class="container-wide">
     <h2 style="text-align:center;">方案與價格</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;max-width:1120px;margin-left:auto;margin-right:auto;">
+    <div class="pricing-grid">
 
       <div class="pricing-card highlighted" style="position:relative;">
         <span style="position:absolute; top:-14px; left:2rem; background:var(--color-orange); color:#fff; font-size:0.75rem; font-weight:700; padding:0.3rem 0.9rem; border-radius:999px; box-shadow:var(--shadow-soft);">入門首選</span>
@@ -423,7 +426,7 @@
       </div>
 
       <div class="pricing-card">
-        <p class="pricing-plan">伴侶諮詢</p>
+        <p class="pricing-plan">方案二・伴侶諮詢</p>
         <p><span class="pricing-price">NT$6,000</span></p>
         <p class="pricing-note">2.5 小時・兩人一起參與・線上或實體皆可</p>
         <div style="margin-top:1.25rem;">
@@ -436,7 +439,7 @@
       </div>
 
       <div class="pricing-card">
-        <p class="pricing-plan">方案二・教練陪跑（核心期）</p>
+        <p class="pricing-plan">方案三・深度陪伴計劃</p>
         <p><span class="pricing-price-old">NT$10,000</span><span class="pricing-price">NT$8,000</span></p>
         <p class="pricing-note">4 次・每次 1 小時・每週一次，約 1 個月</p>
         <div style="margin-top:1.25rem;">
@@ -444,7 +447,8 @@
           <div class="pricing-flow-item">第 2-3 次：陪你在真實情境裡練習分辨</div>
           <div class="pricing-flow-item">第 4 次：檢視進展，決定要不要加購延伸期</div>
         </div>
-        <p style="font-size:0.85rem;color:var(--color-muted);margin-top:1.25rem;">* 需先完成方案一單次解讀，才能報名這個方案</p>
+        <a class="cta-primary" href="#book" style="margin-top:1.5rem;display:block;text-align:center;">預約這個方案</a>
+        <p style="font-size:0.85rem;color:var(--color-muted);margin-top:1rem;">* 建議先完成方案一單次解讀，陪伴時我們才有共同的設計圖基礎可以對話</p>
       </div>
 
     </div>
@@ -469,11 +473,11 @@
         <p class="faq-answer">適合。單次解讀會先從你帶來的困惑開始，再完整解讀你的設計，不需要任何基礎。</p>
       </details>
       <details class="faq-item">
-        <summary>可以直接報名方案二（教練陪跑）嗎？</summary>
-        <p class="faq-answer">需要先完成方案一的單次深度解讀，才能報名方案二。這是為了確保陪跑時，我們有共同的設計圖基礎可以對話。</p>
+        <summary>可以直接報名方案三（深度陪伴計劃）嗎？</summary>
+        <p class="faq-answer">可以直接透過表單預約，但我們建議先完成方案一的單次深度解讀，這樣陪伴時我們才有共同的設計圖基礎可以對話。</p>
       </details>
       <details class="faq-item">
-        <summary>陪跑核心期 4 次結束後一定要繼續嗎？</summary>
+        <summary>深度陪伴計劃 4 次結束後一定要繼續嗎？</summary>
         <p class="faq-answer">不用。第 4 次會一起檢視進展，你可以決定要不要加購延伸期，沒有強制續約。</p>
       </details>
       <details class="faq-item">
@@ -509,7 +513,8 @@
           <select class="field-input" name="預約項目" required>
             <option value="">請選擇</option>
             <option value="方案一・單次深度解讀（1.5小時）">方案一・單次深度解讀（1.5 小時）</option>
-            <option value="伴侶諮詢（2.5小時）">伴侶諮詢（2.5 小時）</option>
+            <option value="方案二・伴侶諮詢（2.5小時）">方案二・伴侶諮詢（2.5 小時）</option>
+            <option value="方案三・深度陪伴計劃（4次核心期）">方案三・深度陪伴計劃（4 次核心期）</option>
           </select>
         </div>
         <div class="field-block">
