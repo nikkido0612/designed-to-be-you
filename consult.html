@@ -406,7 +406,7 @@
 <section id="plans">
   <div class="container-wide">
     <h2 style="text-align:center;">方案與價格</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;max-width:760px;margin-left:auto;margin-right:auto;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2.5rem;max-width:1120px;margin-left:auto;margin-right:auto;">
 
       <div class="pricing-card highlighted" style="position:relative;">
         <span style="position:absolute; top:-14px; left:2rem; background:var(--color-orange); color:#fff; font-size:0.75rem; font-weight:700; padding:0.3rem 0.9rem; border-radius:999px; box-shadow:var(--shadow-soft);">入門首選</span>
@@ -418,6 +418,19 @@
           <div class="pricing-flow-item">完整解讀類型、內在權威、能量中心、關鍵閘門通道</div>
           <div class="pricing-flow-item">收斂回你的困惑，釐清「用你的方式該怎麼判斷」</div>
           <div class="pricing-flow-item">解讀後提供一頁重點筆記</div>
+        </div>
+        <a class="cta-primary" href="#book" style="margin-top:1.5rem;display:block;text-align:center;">預約這個方案</a>
+      </div>
+
+      <div class="pricing-card">
+        <p class="pricing-plan">伴侶諮詢</p>
+        <p><span class="pricing-price">NT$6,000</span></p>
+        <p class="pricing-note">2.5 小時・兩人一起參與・線上或實體皆可</p>
+        <div style="margin-top:1.25rem;">
+          <div class="pricing-flow-item">開場了解兩人目前最卡的相處狀況</div>
+          <div class="pricing-flow-item">分別解讀兩人的類型、內在權威與決策方式，看懂彼此天生的不同</div>
+          <div class="pricing-flow-item">對照兩人的合圖，找出關係裡容易摩擦、也容易互補的地方</div>
+          <div class="pricing-flow-item">把「個性不合」翻譯成「怎麼跟你的另一半好好說話」，給兩人都能上手的相處方式</div>
         </div>
         <a class="cta-primary" href="#book" style="margin-top:1.5rem;display:block;text-align:center;">預約這個方案</a>
       </div>
@@ -484,13 +497,21 @@
 <!-- 9. 預約表單 -->
 <section id="book">
   <div class="container-tight">
-    <h2 style="text-align:center;">預約單次深度解讀</h2>
+    <h2 style="text-align:center;">預約諮詢</h2>
     <p style="text-align:center;color:var(--color-muted);margin-bottom:2rem;">填寫以下資料，我會主動透過 LINE 與你聯繫確認時間</p>
 
     <div class="form-card">
       <form id="bookForm" name="book">
         <p style="position:absolute;left:-9999px" aria-hidden="true"><label>不要填寫這格 <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
+        <div class="field-block">
+          <label class="field-label">預約項目 *</label>
+          <select class="field-input" name="預約項目" required>
+            <option value="">請選擇</option>
+            <option value="方案一・單次深度解讀（1.5小時）">方案一・單次深度解讀（1.5 小時）</option>
+            <option value="伴侶諮詢（2.5小時）">伴侶諮詢（2.5 小時）</option>
+          </select>
+        </div>
         <div class="field-block">
           <label class="field-label">姓名 *</label>
           <input class="field-input" type="text" name="姓名" required>
