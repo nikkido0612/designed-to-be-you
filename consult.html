@@ -118,6 +118,14 @@
     #speaker { background: rgba(114,137,173,0.07); }
 
     .pain-item { display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 1.25rem; background: #fff; border-radius: 18px; border: 1px solid var(--color-border); margin-bottom: 0.75rem; box-shadow: var(--shadow-soft); text-align: left; }
+
+    #hook { background: var(--color-primary); }
+    .hook-eyebrow { font-size: 0.85rem; letter-spacing: 1.5px; font-weight: 700; color: var(--color-orange); margin-bottom: 2rem; text-align: left; }
+    .painpoint-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; text-align: left; }
+    .painpoint-num { display: block; font-family: var(--font-headline); font-size: 2.25rem; font-weight: 700; color: rgba(255,255,255,0.25); margin-bottom: 0.75rem; }
+    .painpoint-line { height: 1px; background: rgba(255,255,255,0.28); margin-bottom: 1rem; }
+    .painpoint-item p { color: rgba(255,255,255,0.9); font-size: 0.975rem; margin: 0; }
+    .painpoint-item strong { color: var(--color-orange); }
     .pain-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
 
     .step-card { background: #fff; border: 1px solid var(--color-border); border-radius: 22px; padding: 2rem; box-shadow: var(--shadow-soft); }
@@ -216,18 +224,41 @@
 </section>
 
 <!-- 1.5 痛點 + CTA -->
-<section id="hook" style="background:#fff;">
-  <div class="container-tight" style="text-align:center;">
-    <div style="max-width:480px;margin-left:auto;margin-right:auto;">
-      <div class="pain-item"><span class="pain-icon">🌀</span><span>工作一直不開心，很想換，卻又怕換了還是找不到自己喜歡的</span></div>
-      <div class="pain-item"><span class="pain-icon">💬</span><span>關係裡一直忍耐，說不清楚為什麼，也不知道該堅持還是放手</span></div>
-      <div class="pain-item"><span class="pain-icon">😮‍💨</span><span>明明很累了，卻停不下來，好像一停下來就會有罪惡感</span></div>
-      <div class="pain-item"><span class="pain-icon">🤷</span><span>別人問你想要什麼，腦袋一片空白，因為你已經很久沒問過自己了</span></div>
-      <div class="pain-item"><span class="pain-icon">🙋</span><span>每次要做決定，都要問過一輪身邊的人才敢下決定，好像自己的答案不算數</span></div>
+<section id="hook">
+  <div class="container-wide">
+    <p class="hook-eyebrow">你是否也正經歷這些狀態？</p>
+    <div class="painpoint-grid">
+      <div class="painpoint-item">
+        <span class="painpoint-num">01</span>
+        <div class="painpoint-line"></div>
+        <p><strong>工作：</strong>想換工作，卻怕換了之後，還是找不到真正喜歡的方向。</p>
+      </div>
+      <div class="painpoint-item">
+        <span class="painpoint-num">02</span>
+        <div class="painpoint-line"></div>
+        <p><strong>關係：</strong>在關係裡一再忍耐，卻不知道該繼續磨合，還是選擇離開。</p>
+      </div>
+      <div class="painpoint-item">
+        <span class="painpoint-num">03</span>
+        <div class="painpoint-line"></div>
+        <p><strong>個人：</strong>明明已經很累，卻不敢停下來，一休息就感到罪惡。</p>
+      </div>
+      <div class="painpoint-item">
+        <span class="painpoint-num">04</span>
+        <div class="painpoint-line"></div>
+        <p><strong>決策：</strong>每次做選擇，都要問遍身邊的人，卻越問越不知道自己要什麼。</p>
+      </div>
+      <div class="painpoint-item">
+        <span class="painpoint-num">05</span>
+        <div class="painpoint-line"></div>
+        <p><strong>親子：</strong>明明是為孩子好，卻總是越溝通、衝突越多，不知道怎麼真正理解他。</p>
+      </div>
     </div>
 
-    <a class="cta-primary" href="#book" style="margin-top:2rem;">預約一次深度解讀</a>
-    <p style="margin-top:1rem;"><a href="https://line.me/ti/p/~nikkido0612" target="_blank" rel="noopener" style="font-size:0.9rem;color:var(--color-muted);text-decoration:underline;">還沒準備好？先加 LINE 聊聊</a></p>
+    <div style="text-align:center;">
+      <a class="cta-primary" href="#book" style="margin-top:3rem;">預約一次深度解讀</a>
+      <p style="margin-top:1rem;"><a href="https://line.me/ti/p/~nikkido0612" target="_blank" rel="noopener" style="font-size:0.9rem;color:rgba(255,255,255,0.75);text-decoration:underline;">還沒準備好？先加 LINE 聊聊</a></p>
+    </div>
   </div>
 </section>
 
