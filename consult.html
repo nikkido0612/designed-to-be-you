@@ -65,6 +65,9 @@
     #hero h1, #hero p { text-shadow: 0 2px 10px rgba(0,0,0,0.35); }
     #hero .container-tight { position: relative; z-index: 1; }
 
+    .whatis-grid { display: grid; grid-template-columns: minmax(220px,340px) 1fr; gap: 3rem; align-items: start; }
+    @media (max-width: 767px) { .whatis-grid { grid-template-columns: 1fr; } }
+
     .blob-accent { position: relative; overflow: hidden; }
     .blob-accent > * { position: relative; z-index: 1; }
     .blob-accent::before {
@@ -248,12 +251,27 @@
 
 <!-- 2.5 人類圖是什麼 -->
 <section id="whatis" style="background:var(--color-primary);">
-  <div class="container-tight">
-    <h2 style="color:#fff;">人類圖是什麼？</h2>
-    <p style="color:rgba(255,255,255,0.88);">簡單來說，就是一張專屬於你的人生使用說明書！</p>
-    <p style="color:rgba(255,255,255,0.88);">每一個人都有不同的設計，有不同的天賦才華及固定運作的模式，同時也有開放被外界影響的不同課題。</p>
-    <p style="color:rgba(255,255,255,0.88);">從這些課題中可以累積人生的智慧，進而完成每一個人的不同使命！</p>
-    <blockquote style="border-left:4px solid #fff; margin:1.5rem 0 0; padding-left:1.25rem; font-weight:600; color:#fff;">透過了解自己可以做出正確的選擇，如果理解他人，更能夠建立美好的關係。</blockquote>
+  <div class="container-wide">
+    <div class="whatis-grid">
+      <img src="whatis.jpg" alt="人類圖能量藍圖示意" style="width:100%; border-radius:20px; box-shadow:var(--shadow-hover);">
+      <div>
+        <h2 style="color:#fff;">人類圖：看懂你的天生設計，活出更適合自己的人生</h2>
+        <p style="color:rgba(255,255,255,0.88);">你是否曾經懷疑：為什麼有些選擇看似正確，做起來卻特別費力？為什麼你明明已經很努力，內心仍然感到不確定？</p>
+        <p style="color:rgba(255,255,255,0.88);">或許，你需要的不是更努力改變自己。而是重新認識，你原本就是如何運作的。</p>
+        <p style="color:rgba(255,255,255,0.88);">人類圖是一套自我探索工具。它融合占星學、《易經》、印度脈輪系統、卡巴拉生命之樹等古老智慧，也借鑑量子物理學與遺傳學的概念，形成一張專屬於你的能量藍圖。</p>
+        <p style="color:rgba(255,255,255,0.88); font-weight:600;">這張藍圖能幫助你看見：</p>
+        <ul style="color:rgba(255,255,255,0.88); padding-left:1.25rem; margin:0 0 1rem;">
+          <li>你與生俱來的優勢與天賦</li>
+          <li>你容易感到挫折與內耗的原因</li>
+          <li>你適合的決策方式</li>
+          <li>你在人際關係中的互動模式</li>
+          <li>你尚未被充分發揮的潛能</li>
+        </ul>
+        <p style="color:rgba(255,255,255,0.88);">透過人類圖，你不需要成為另一個人。你會開始理解，如何依照自己的天生設計做選擇，減少不必要的阻力，也不再一味迎合外界的期待。</p>
+        <p style="color:rgba(255,255,255,0.88);">人類圖不是一套要求你相信的信念系統。它更像是一場關於自己的實驗。你可以在生活中觀察、驗證，逐步理解自己的能量如何運作，以及什麼樣的人生方式，真正適合你。</p>
+        <blockquote style="border-left:4px solid #fff; margin:1.5rem 0 0; padding-left:1.25rem; font-weight:600; color:#fff;">當你開始看懂自己，就不必再用別人的標準定義人生。你會更清楚地做出決定，更自在地發揮優勢，也更有方向地走向屬於自己的目的與滿足。</blockquote>
+      </div>
+    </div>
   </div>
 </section>
 
