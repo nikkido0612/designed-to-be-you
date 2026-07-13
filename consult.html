@@ -135,7 +135,8 @@
     .step-card { background: #fff; border: 1px solid var(--color-border); border-radius: 22px; padding: 2rem; box-shadow: var(--shadow-soft); }
     .step-tag { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; color: var(--color-orange); text-transform: uppercase; margin-bottom: 0.75rem; }
 
-    .pricing-card { background: #fff; border: 1px solid var(--color-border); border-radius: 22px; padding: 2rem; box-shadow: var(--shadow-soft); transition: all var(--transition); }
+    .pricing-card { background: #fff; border: 1px solid var(--color-border); border-radius: 22px; padding: 2rem; box-shadow: var(--shadow-soft); transition: all var(--transition); display: flex; flex-direction: column; }
+    .pricing-card .cta-primary { margin-top: auto; }
     .pricing-card.highlighted { border: 2px solid var(--color-cta); box-shadow: 0 8px 32px rgba(114,137,173,0.18); }
     .pricing-plan { font-size: 0.95rem; font-weight: 700; letter-spacing: 1px; color: var(--color-primary); margin-bottom: 0.5rem; }
     .pricing-price { font-size: 2rem; font-weight: 700; color: var(--color-cta); font-family: var(--font-headline); }
@@ -174,7 +175,7 @@
     .speaker-stat .num { font-family: var(--font-headline); font-size: 1.75rem; font-weight: 700; color: var(--color-cta); }
     .speaker-stat .label { font-size: 0.8rem; color: var(--color-muted); }
 
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2.5rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: 2.5rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
     @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 480px; } }
 
     details.faq-item { border-bottom: 1px solid var(--color-border); }
@@ -422,7 +423,7 @@
           <div class="pricing-flow-item">收斂回你的困惑，釐清「用你的方式該怎麼判斷」</div>
           <div class="pricing-flow-item">解讀後提供一頁重點筆記</div>
         </div>
-        <a class="cta-primary" href="#book" style="margin-top:1.5rem;display:block;text-align:center;">預約這個方案</a>
+        <a class="cta-primary" href="#book" style="display:block;text-align:center;">預約這個方案</a>
       </div>
 
       <div class="pricing-card">
@@ -431,11 +432,11 @@
         <p class="pricing-note">2.5 小時・兩人一起參與・線上或實體皆可</p>
         <div style="margin-top:1.25rem;">
           <div class="pricing-flow-item">開場了解兩人目前最卡的相處狀況</div>
-          <div class="pricing-flow-item">分別解讀兩人的類型、內在權威與決策方式，看懂彼此天生的不同</div>
-          <div class="pricing-flow-item">對照兩人的合圖，找出關係裡容易摩擦、也容易互補的地方</div>
-          <div class="pricing-flow-item">把「個性不合」翻譯成「怎麼跟你的另一半好好說話」，給兩人都能上手的相處方式</div>
+          <div class="pricing-flow-item">分別解讀兩人的類型與決策方式的差異</div>
+          <div class="pricing-flow-item">對照合圖，看懂關係裡的摩擦與互補</div>
+          <div class="pricing-flow-item">給兩人都能上手的具體相處方式</div>
         </div>
-        <a class="cta-primary" href="#book" style="margin-top:1.5rem;display:block;text-align:center;">預約這個方案</a>
+        <a class="cta-primary" href="#book" style="display:block;text-align:center;">預約這個方案</a>
       </div>
 
       <div class="pricing-card">
@@ -447,7 +448,7 @@
           <div class="pricing-flow-item">第 2-3 次：陪你在真實情境裡練習分辨</div>
           <div class="pricing-flow-item">第 4 次：檢視進展，決定要不要加購延伸期</div>
         </div>
-        <a class="cta-primary" href="#book" style="margin-top:1.5rem;display:block;text-align:center;">預約這個方案</a>
+        <a class="cta-primary" href="#book" style="display:block;text-align:center;">預約這個方案</a>
         <p style="font-size:0.85rem;color:var(--color-muted);margin-top:1rem;">* 建議先完成方案一單次解讀，陪伴時我們才有共同的設計圖基礎可以對話</p>
       </div>
 
