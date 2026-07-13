@@ -20,14 +20,15 @@
        (7) 出生時間 — 時間
        (8) 出生地點 — 簡答
        (9) 方便時段 — 核取方塊（複選）— 選項：平日上午（9:00-12:00）／平日下午（14:00-17:00）／平日晚上（19:00-21:00）／週末（10:00-17:00）／其他時間，請在下方備註說明
-       (10) 付款方式 — 下拉式選單或選擇題 — 選項：LINE PAY／轉帳
-       (11) 轉帳後5碼 — 簡答（非必填，網頁上會用 JS 依付款方式動態要求填寫）
-       (12) 這次帶著什麼卡住的決定或困惑而來？ — 段落（非必填）
+       (10) 其他方便時間備註 — 簡答（非必填，勾選「其他時間」才會出現，網頁上用 JS 控制顯示）
+       (11) 付款方式 — 下拉式選單或選擇題 — 選項：LINE PAY／轉帳
+       (12) 轉帳後5碼 — 簡答（非必填，網頁上會用 JS 依付款方式動態要求填寫）
+       (13) 這次帶著什麼卡住的決定或困惑而來？ — 段落（非必填）
 
     2. 表單建好後，點選「預覽」，把每一題隨便填一個答案，
        再點右上角三個點 →「取得已預先填寫的連結」→「取得連結」，
        會產生一長串網址，裡面每一題都是 entry.XXXXXXXXX=你填的答案 這種格式。
-       把每一題對應的 entry.XXXXXXXXX 複製下來，取代這份檔案裡的 PLAN_ENTRY_ID／NAME_ENTRY_ID 等等 12 個佔位字。
+       把每一題對應的 entry.XXXXXXXXX 複製下來，取代這份檔案裡的 PLAN_ENTRY_ID／NAME_ENTRY_ID 等等 13 個佔位字。
 
     3. 把該長網址最前面 https://docs.google.com/forms/d/e/xxxxxxxx/viewform 的
        xxxxxxxx（表單 ID）複製下來，取代下面 form action 裡的 PASTE_YOUR_GOOGLE_FORM_ID_HERE。
@@ -147,16 +148,16 @@
       <li><a href="consult.html#plans">方案與價格</a></li>
       <li><a href="consult.html#faq">FAQ</a></li>
     </ul>
-    <a class="nav-cta" href="consult.html">← 返回銷售頁</a>
+    <a class="nav-cta" href="consult.html">← 返回</a>
   </div>
 </nav>
 
 <!-- 預約表單 -->
 <section style="padding-top:8rem;">
   <div class="container-tight">
-    <a class="back-link" href="consult.html">← 返回銷售頁</a>
+    <a class="back-link" href="consult.html">← 返回</a>
     <h1 style="margin-top:1.5rem;">預約諮詢</h1>
-    <p style="color:var(--color-muted);margin-bottom:2rem;">填寫以下資料，我會主動透過 LINE 與你聯繫確認時間。人類圖需要精確的出生日期、時間與地點才能起盤，請盡量提供正確資訊。</p>
+    <p style="color:var(--color-muted);margin-bottom:2rem;">填寫以下資料，我會主動透過 LINE 與你聯繫確認時間。人類圖需要精確的出生日期、時間與地點才能合圖，請盡量提供正確資訊。</p>
 
     <div class="form-card">
       <form id="bookForm" name="book" target="hidden_iframe" action="https://docs.google.com/forms/d/e/PASTE_YOUR_GOOGLE_FORM_ID_HERE/formResponse" method="POST">
@@ -188,7 +189,7 @@
           <input class="field-input" type="email" name="entry.EMAIL_ENTRY_ID" required>
         </div>
 
-        <p class="field-group-label">生辰資料（人類圖起盤必填）</p>
+        <p class="field-group-label">生辰資料（人類圖合圖必填）</p>
 
         <div class="field-block">
           <label class="field-label">出生日期（西元） *</label>
@@ -211,6 +212,11 @@
           <div class="checkbox-row"><input type="checkbox" id="slot3" name="entry.TIMESLOT_ENTRY_ID" value="平日晚上（19:00-21:00）"><label for="slot3">平日晚上（19:00-21:00）</label></div>
           <div class="checkbox-row"><input type="checkbox" id="slot4" name="entry.TIMESLOT_ENTRY_ID" value="週末（10:00-17:00）"><label for="slot4">週末（10:00-17:00）</label></div>
           <div class="checkbox-row"><input type="checkbox" id="slot5" name="entry.TIMESLOT_ENTRY_ID" value="其他時間，請在下方備註說明"><label for="slot5">其他時間，請在下方備註說明</label></div>
+        </div>
+
+        <div class="field-block" id="otherTimeBlock" style="display:none;">
+          <label class="field-label">請寫下你方便的時間</label>
+          <input class="field-input" type="text" id="otherTimeInput" name="entry.OTHERTIME_ENTRY_ID" placeholder="例如：週四晚上9點後都可以">
         </div>
 
         <div class="field-block">
@@ -304,6 +310,20 @@
       transferInfo.style.display = (v === '轉帳') ? 'block' : 'none';
       last5Input.required = (v === '轉帳');
       if (v !== '轉帳') { last5Input.value = ''; }
+    });
+  })();
+</script>
+
+<!-- 方便時段勾選「其他時間」時，顯示備註輸入框 -->
+<script>
+  (function () {
+    var slot5 = document.getElementById('slot5');
+    var otherTimeBlock = document.getElementById('otherTimeBlock');
+    var otherTimeInput = document.getElementById('otherTimeInput');
+
+    slot5.addEventListener('change', function () {
+      otherTimeBlock.style.display = slot5.checked ? 'block' : 'none';
+      if (!slot5.checked) { otherTimeInput.value = ''; }
     });
   })();
 </script>
