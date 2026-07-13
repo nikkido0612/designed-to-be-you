@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>預約諮詢 — 人類圖諮詢</title>
+  <meta name="description" content="填寫資料預約人類圖諮詢，我會主動透過 LINE 與你聯繫確認時間。">
+
+  <!--
+    ============================================================
+    這個表單直接送到 Google 表單後台，需要以下設定才能正式運作：
+
+    1. 建一個 Google 表單，欄位順序與型態如下（順序需一致）：
+       (1) 預約項目 — 下拉式選單 — 選項：方案一・單次深度解讀（1.5小時）／方案二・伴侶諮詢（2.5小時）／方案三・深度陪伴計劃（4次核心期）
+       (2) 姓名 — 簡答
+       (3) 電話 — 簡答
+       (4) LINE 帳號 — 簡答
+       (5) Email — 簡答（可設定 Email 驗證）
+       (6) 出生日期 — 日期
+       (7) 出生時間 — 時間
+       (8) 出生地點 — 簡答
+       (9) 方便時段 — 核取方塊（複選）— 選項：平日上午（9:00-12:00）／平日下午（14:00-17:00）／平日晚上（19:00-21:00）／週末（10:00-17:00）／其他時間，請在下方備註說明
+       (10) 這次帶著什麼卡住的決定或困惑而來？ — 段落（非必填）
+
+    2. 表單建好後，點選「預覽」，把每一題隨便填一個答案，
+       再點右上角三個點 →「取得已預先填寫的連結」→「取得連結」，
+       會產生一長串網址，裡面每一題都是 entry.XXXXXXXXX=你填的答案 這種格式。
+       把每一題對應的 entry.XXXXXXXXX 複製下來，取代這份檔案裡的 PLAN_ENTRY_ID／NAME_ENTRY_ID 等等 10 個佔位字。
+
+    3. 把該長網址最前面 https://docs.google.com/forms/d/e/xxxxxxxx/viewform 的
+       xxxxxxxx（表單 ID）複製下來，取代下面 form action 裡的 PASTE_YOUR_GOOGLE_FORM_ID_HERE。
+
+    4. 務必用 nikki.humandesign@gmail.com 這個帳號登入建立表單，
+       建好後到「回覆」分頁 → 右上角三個點 →「取得新回覆的電子郵件通知」打開，
+       之後每次有人送出，會自動寄一封通知信到 nikki.humandesign@gmail.com，
+       所有回覆同時也會留在表單後台的「回覆」分頁（可另外連結一個 Google Sheet 檢視）。
+    ============================================================
+  -->
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-primary: #7289AD;
+      --color-cta:     #7289AD;
+      --color-cta-hover: #5D75A0;
+      --color-sage:    #7C9473;
+      --color-teal:    #009E82;
+      --color-orange:  #D9822B;
+      --color-gold:    #C99A2E;
+      --color-text:    #333333;
+      --color-bg:      #FAF8F4;
+      --color-muted:   rgba(51,51,51,0.6);
+      --color-border:  rgba(51,51,51,0.12);
+      --font-headline: 'Noto Serif TC', serif;
+      --font-body:     'Noto Sans TC', sans-serif;
+      --transition:    250ms cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-soft:   0 4px 12px rgba(51,51,51,0.08);
+      --shadow-hover:  0 10px 28px rgba(51,51,51,0.14);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-text);
+      background: var(--color-bg);
+      font-size: 1.1rem;
+      line-height: 2;
+      margin: 0;
+    }
+
+    h1, h2, h3 { font-family: var(--font-headline) !important; font-weight: 700 !important; line-height: 1.35; }
+    h1 { font-size: clamp(1.7rem, 4.5vw, 2.75rem) !important; margin-bottom: 1rem !important; }
+    h2 { font-size: clamp(1.4rem, 3.5vw, 2.1rem) !important; margin-bottom: 1.5rem !important; }
+    h3 { font-size: 1.2rem !important; margin-bottom: 0.75rem !important; }
+
+    .container-tight { max-width: 672px; margin: 0 auto; padding: 0 1.5rem; }
+
+    section { padding: 4rem 0; }
+
+    /* ===== Nav ===== */
+    #siteNav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    #siteNav.scrolled { border-color: var(--color-border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .nav-inner { max-width: 1024px; margin: 0 auto; padding: 0 1.5rem; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+    .nav-brand { font-family: var(--font-headline); font-weight: 700; font-size: 1rem; color: var(--color-primary); text-decoration: none; white-space: nowrap; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { font-size: 0.875rem; color: var(--color-text); text-decoration: none; opacity: 0.7; transition: opacity var(--transition); }
+    .nav-links a:hover { opacity: 1; }
+    @media (max-width: 860px) { .nav-links { display: none; } }
+    .nav-cta { background: var(--color-cta); color: #fff; padding: 0.45rem 1.1rem; border-radius: 10px; font-size: 0.875rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: opacity var(--transition); }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ===== CTA Button ===== */
+    .cta-primary {
+      display: inline-block; background: var(--color-cta); color: #fff;
+      padding: 1rem 2rem; border-radius: 14px; font-weight: 600; font-size: 1.05rem;
+      text-decoration: none; cursor: pointer; transition: all var(--transition);
+      box-shadow: var(--shadow-soft); border: none;
+    }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); background: var(--color-cta-hover); }
+    .cta-primary:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+    .back-link { font-size: 0.9rem; color: var(--color-muted); text-decoration: none; }
+    .back-link:hover { color: var(--color-primary); }
+
+    /* ===== Form ===== */
+    .field-label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--color-primary); }
+    .field-input {
+      width: 100%; padding: 0.75rem 1rem; font-size: 0.975rem; font-family: inherit;
+      border: 1px solid var(--color-border); border-radius: 14px; background: #fff; color: var(--color-text);
+      transition: border-color var(--transition); box-sizing: border-box;
+    }
+    .field-input:focus { outline: none; border-color: var(--color-cta); }
+    .field-block { margin-bottom: 1.5rem; }
+    .field-hint { font-size: 0.8rem; color: var(--color-muted); margin: 0.4rem 0 0; }
+    .field-group-label { font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; color: var(--color-muted); margin: 2rem 0 1.25rem; }
+    .checkbox-row { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.6rem; font-size: 0.95rem; }
+    .checkbox-row input { margin-top: 0.35rem; flex-shrink: 0; }
+    .form-card { background: #fff; border: 1px solid var(--color-border); border-radius: 22px; padding: 2rem; box-shadow: var(--shadow-soft); }
+    .err-msg { font-size: 0.85rem; color: #B5453F; margin-top: 1rem; display: none; }
+    .thanks-box { text-align: center; padding: 2rem 0; }
+    .contact-card { background: rgba(51,51,51,0.06); border-radius: 16px; padding: 1.25rem; margin-top: 1.5rem; display: inline-block; }
+
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<nav id="siteNav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="consult.html" style="display:flex;align-items:center;gap:0.6rem;"><img src="logo.png" alt="" style="width:40px;height:40px;">人類圖諮詢</a>
+    <ul class="nav-links">
+      <li><a href="consult.html#speaker">帶領者</a></li>
+      <li><a href="consult.html#plans">方案與價格</a></li>
+      <li><a href="consult.html#faq">FAQ</a></li>
+    </ul>
+    <a class="nav-cta" href="consult.html">← 返回銷售頁</a>
+  </div>
+</nav>
+
+<!-- 預約表單 -->
+<section style="padding-top:8rem;">
+  <div class="container-tight">
+    <a class="back-link" href="consult.html">← 返回銷售頁</a>
+    <h1 style="margin-top:1.5rem;">預約諮詢</h1>
+    <p style="color:var(--color-muted);margin-bottom:2rem;">填寫以下資料，我會主動透過 LINE 與你聯繫確認時間。人類圖需要精確的出生日期、時間與地點才能起盤，請盡量提供正確資訊。</p>
+
+    <div class="form-card">
+      <form id="bookForm" name="book" target="hidden_iframe" action="https://docs.google.com/forms/d/e/PASTE_YOUR_GOOGLE_FORM_ID_HERE/formResponse" method="POST">
+        <p style="position:absolute;left:-9999px" aria-hidden="true"><label>不要填寫這格 <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+
+        <div class="field-block">
+          <label class="field-label">預約項目 *</label>
+          <select class="field-input" id="planSelect" name="entry.PLAN_ENTRY_ID" required>
+            <option value="">請選擇</option>
+            <option value="方案一・單次深度解讀（1.5小時）">方案一・單次深度解讀（1.5 小時）</option>
+            <option value="方案二・伴侶諮詢（2.5小時）">方案二・伴侶諮詢（2.5 小時）</option>
+            <option value="方案三・深度陪伴計劃（4次核心期）">方案三・深度陪伴計劃（4 次核心期）</option>
+          </select>
+        </div>
+        <div class="field-block">
+          <label class="field-label">姓名 *</label>
+          <input class="field-input" type="text" name="entry.NAME_ENTRY_ID" required>
+        </div>
+        <div class="field-block">
+          <label class="field-label">電話 *</label>
+          <input class="field-input" type="tel" name="entry.PHONE_ENTRY_ID" required>
+        </div>
+        <div class="field-block">
+          <label class="field-label">LINE 帳號 *</label>
+          <input class="field-input" type="text" name="entry.LINE_ENTRY_ID" required>
+        </div>
+        <div class="field-block">
+          <label class="field-label">Email *</label>
+          <input class="field-input" type="email" name="entry.EMAIL_ENTRY_ID" required>
+        </div>
+
+        <p class="field-group-label">生辰資料（人類圖起盤必填）</p>
+
+        <div class="field-block">
+          <label class="field-label">出生日期（西元） *</label>
+          <input class="field-input" type="date" name="entry.BIRTHDATE_ENTRY_ID" required>
+        </div>
+        <div class="field-block">
+          <label class="field-label">出生時間 *</label>
+          <input class="field-input" type="time" name="entry.BIRTHTIME_ENTRY_ID" required>
+          <p class="field-hint">請盡量提供正確時間（可對照出生證明），若真的不確定，請填寫大概時間，並在下方備註說明。</p>
+        </div>
+        <div class="field-block">
+          <label class="field-label">出生地點 *</label>
+          <input class="field-input" type="text" name="entry.BIRTHPLACE_ENTRY_ID" placeholder="例如：台灣台北市" required>
+        </div>
+
+        <div class="field-block">
+          <label class="field-label">方便時段（可複選） *</label>
+          <div class="checkbox-row"><input type="checkbox" id="slot1" name="entry.TIMESLOT_ENTRY_ID" value="平日上午（9:00-12:00）"><label for="slot1">平日上午（9:00-12:00）</label></div>
+          <div class="checkbox-row"><input type="checkbox" id="slot2" name="entry.TIMESLOT_ENTRY_ID" value="平日下午（14:00-17:00）"><label for="slot2">平日下午（14:00-17:00）</label></div>
+          <div class="checkbox-row"><input type="checkbox" id="slot3" name="entry.TIMESLOT_ENTRY_ID" value="平日晚上（19:00-21:00）"><label for="slot3">平日晚上（19:00-21:00）</label></div>
+          <div class="checkbox-row"><input type="checkbox" id="slot4" name="entry.TIMESLOT_ENTRY_ID" value="週末（10:00-17:00）"><label for="slot4">週末（10:00-17:00）</label></div>
+          <div class="checkbox-row"><input type="checkbox" id="slot5" name="entry.TIMESLOT_ENTRY_ID" value="其他時間，請在下方備註說明"><label for="slot5">其他時間，請在下方備註說明</label></div>
+        </div>
+
+        <div class="field-block">
+          <label class="field-label">這次帶著什麼卡住的決定或困惑而來？</label>
+          <textarea class="field-input" name="entry.NOTE_ENTRY_ID" rows="3" placeholder="不用寫得很完整，簡單描述就好"></textarea>
+        </div>
+
+        <div style="text-align:center;margin-top:2rem;">
+          <button type="submit" id="submitBtn" class="cta-primary">送出預約</button>
+          <p id="errMsg" class="err-msg">請完整填寫所有必填欄位（標示 *）後再送出。</p>
+        </div>
+      </form>
+
+      <div id="thanksBox" style="display:none;" class="thanks-box">
+        <h3>預約已送出 🌱</h3>
+        <p style="color:var(--color-muted);">感謝你的預約！我會主動透過 LINE 與你聯繫，確認時間。</p>
+        <div class="contact-card">
+          <p style="margin:0;font-weight:600;">楊明怡 NIKKI　LINE：nikkido0612</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+<footer style="padding:2.5rem 0;text-align:center;background:var(--color-primary);">
+  <p style="font-size:0.8rem;color:rgba(250,247,242,0.6);margin:0;">© 2026 Designed to be YOU</p>
+</footer>
+
+<!-- Nav scroll script -->
+<script>
+  (function () {
+    var nav = document.getElementById('siteNav');
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+  })();
+</script>
+
+<!-- 依 ?plan=1/2/3 預選方案 -->
+<script>
+  (function () {
+    var planMap = {
+      '1': '方案一・單次深度解讀（1.5小時）',
+      '2': '方案二・伴侶諮詢（2.5小時）',
+      '3': '方案三・深度陪伴計劃（4次核心期）'
+    };
+    var plan = new URLSearchParams(window.location.search).get('plan');
+    var select = document.getElementById('planSelect');
+    if (plan && planMap[plan] && select) { select.value = planMap[plan]; }
+  })();
+</script>
+
+<!-- Booking form submit（直接 POST 到 Google 表單，用隱藏 iframe 承接回應） -->
+<script>
+  (function () {
+    var submitted = false;
+    var form = document.getElementById('bookForm');
+    var iframe = document.getElementById('hidden_iframe');
+
+    iframe.addEventListener('load', function () {
+      if (!submitted) return;
+      form.style.display = 'none';
+      document.getElementById('thanksBox').style.display = 'block';
+    });
+
+    form.addEventListener('submit', function (e) {
+      if (form.querySelector('input[name="bot-field"]').value) { e.preventDefault(); return; }
+
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        document.getElementById('errMsg').style.display = 'block';
+        form.reportValidity();
+        return;
+      }
+      document.getElementById('errMsg').style.display = 'none';
+      submitted = true;
+      // 不 preventDefault，讓表單正常送出到隱藏的 iframe
+      // 按鈕的停用/文字改變延到下一個 tick 才做，避免在 submit 事件處理中途
+      // 停用 submitter 按鈕導致部分瀏覽器把這次表單送出取消掉
+      setTimeout(function () {
+        var btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.textContent = '送出中…';
+      }, 0);
+    });
+  })();
+</script>
+
+</body>
+</html>
