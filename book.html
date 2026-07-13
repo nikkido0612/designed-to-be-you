@@ -20,12 +20,14 @@
        (7) 出生時間 — 時間
        (8) 出生地點 — 簡答
        (9) 方便時段 — 核取方塊（複選）— 選項：平日上午（9:00-12:00）／平日下午（14:00-17:00）／平日晚上（19:00-21:00）／週末（10:00-17:00）／其他時間，請在下方備註說明
-       (10) 這次帶著什麼卡住的決定或困惑而來？ — 段落（非必填）
+       (10) 付款方式 — 下拉式選單或選擇題 — 選項：LINE PAY／轉帳
+       (11) 轉帳後5碼 — 簡答（非必填，網頁上會用 JS 依付款方式動態要求填寫）
+       (12) 這次帶著什麼卡住的決定或困惑而來？ — 段落（非必填）
 
     2. 表單建好後，點選「預覽」，把每一題隨便填一個答案，
        再點右上角三個點 →「取得已預先填寫的連結」→「取得連結」，
        會產生一長串網址，裡面每一題都是 entry.XXXXXXXXX=你填的答案 這種格式。
-       把每一題對應的 entry.XXXXXXXXX 複製下來，取代這份檔案裡的 PLAN_ENTRY_ID／NAME_ENTRY_ID 等等 10 個佔位字。
+       把每一題對應的 entry.XXXXXXXXX 複製下來，取代這份檔案裡的 PLAN_ENTRY_ID／NAME_ENTRY_ID 等等 12 個佔位字。
 
     3. 把該長網址最前面 https://docs.google.com/forms/d/e/xxxxxxxx/viewform 的
        xxxxxxxx（表單 ID）複製下來，取代下面 form action 裡的 PASTE_YOUR_GOOGLE_FORM_ID_HERE。
@@ -122,6 +124,7 @@
     .field-input:focus { outline: none; border-color: var(--color-cta); }
     .field-block { margin-bottom: 1.5rem; }
     .field-hint { font-size: 0.8rem; color: var(--color-muted); margin: 0.4rem 0 0; }
+    .field-hint-box { background: rgba(114,137,173,0.08); border: 1px solid var(--color-border); border-radius: 14px; padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--color-text); margin-bottom: 1.5rem; line-height: 1.7; }
     .field-group-label { font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 700; color: var(--color-muted); margin: 2rem 0 1.25rem; }
     .checkbox-row { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.6rem; font-size: 0.95rem; }
     .checkbox-row input { margin-top: 0.35rem; flex-shrink: 0; }
@@ -211,6 +214,31 @@
         </div>
 
         <div class="field-block">
+          <label class="field-label">付款方式 *</label>
+          <select class="field-input" id="paymentSelect" name="entry.PAYMENT_ENTRY_ID" required>
+            <option value="">請選擇</option>
+            <option value="LINE PAY">LINE PAY</option>
+            <option value="轉帳">轉帳</option>
+          </select>
+        </div>
+
+        <div id="linepayInfo" class="field-hint-box" style="display:none;">
+          請透過 LINE Pay 轉帳，收款 LINE：nikkido0612，備註您的姓名，我確認後會回覆您。
+        </div>
+
+        <div id="transferInfo" style="display:none;">
+          <div class="field-hint-box">
+            銀行：中國信託（822）敦北分行<br>
+            帳號：015540059098<br>
+            戶名：楊明怡
+          </div>
+          <div class="field-block">
+            <label class="field-label">轉帳後5碼 *</label>
+            <input class="field-input" type="text" id="last5Input" name="entry.LAST5_ENTRY_ID" maxlength="5" placeholder="例如：12345">
+          </div>
+        </div>
+
+        <div class="field-block">
           <label class="field-label">這次帶著什麼卡住的決定或困惑而來？</label>
           <textarea class="field-input" name="entry.NOTE_ENTRY_ID" rows="3" placeholder="不用寫得很完整，簡單描述就好"></textarea>
         </div>
@@ -259,6 +287,24 @@
     var plan = new URLSearchParams(window.location.search).get('plan');
     var select = document.getElementById('planSelect');
     if (plan && planMap[plan] && select) { select.value = planMap[plan]; }
+  })();
+</script>
+
+<!-- 依付款方式顯示對應資訊，轉帳時「後5碼」才必填 -->
+<script>
+  (function () {
+    var paymentSelect = document.getElementById('paymentSelect');
+    var linepayInfo = document.getElementById('linepayInfo');
+    var transferInfo = document.getElementById('transferInfo');
+    var last5Input = document.getElementById('last5Input');
+
+    paymentSelect.addEventListener('change', function () {
+      var v = paymentSelect.value;
+      linepayInfo.style.display = (v === 'LINE PAY') ? 'block' : 'none';
+      transferInfo.style.display = (v === '轉帳') ? 'block' : 'none';
+      last5Input.required = (v === '轉帳');
+      if (v !== '轉帳') { last5Input.value = ''; }
+    });
   })();
 </script>
 
