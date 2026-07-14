@@ -8,39 +8,24 @@
 
   <!--
     ============================================================
-    這個表單直接送到 Google 表單後台，需要以下設定才能正式運作：
+    2026-07-14：改回 Google Apps Script + Google Sheet 架構
+    （原本試過直接 POST 到 Google 表單，但 Google 表單需要一個叫 fbzx 的
+    防偽權杖，這個權杖每次載入頁面才會產生、無法寫死在網頁裡，實測後
+    確認送出的資料完全不會被表單記錄。改用 Apps Script 就沒有這個問題，
+    因為那是使用者自己部署、自己授權的程式。）
 
-    1. 建一個 Google 表單，欄位順序與型態如下（順序需一致）：
-       (1) 預約項目 — 下拉式選單 — 選項：方案一・單次深度解讀（1.5小時）／方案二・伴侶諮詢（2.5小時）／方案三・深度陪伴計劃（4次核心期）
-       (2) 姓名 — 簡答
-       (3) 電話 — 簡答
-       (4) LINE 帳號 — 簡答
-       (5) Email — 簡答（可設定 Email 驗證）
-       (6) 出生日期 — 日期
-       (7) 出生時間 — 時間
-       (8) 出生地點 — 簡答
-       (9) 伴侶姓名 — 簡答（非必填，選方案二才會出現，網頁上用 JS 控制顯示與必填）
-       (10) 伴侶出生日期 — 日期（非必填，同上）
-       (11) 伴侶出生時間 — 時間（非必填，同上）
-       (12) 伴侶出生地點 — 簡答（非必填，同上）
-       (13) 方便時段 — 核取方塊（複選）— 選項：平日上午（9:00-12:00）／平日下午（14:00-17:00）／平日晚上（19:00-21:00）／週末（10:00-17:00）／其他時間，請在下方備註說明
-       (14) 其他方便時間備註 — 簡答（非必填，勾選「其他時間」才會出現，網頁上用 JS 控制顯示）
-       (15) 付款方式 — 下拉式選單或選擇題 — 選項：LINE PAY／轉帳
-       (16) 轉帳後5碼 — 簡答（非必填，網頁上會用 JS 依付款方式動態要求填寫）
-       (17) 想要特別探索或諮詢的面向，例如人際、感情、工作、人生方向......等 — 段落（非必填）
-
-    2. 表單建好後，點選「預覽」，把每一題隨便填一個答案，
-       再點右上角三個點 →「取得已預先填寫的連結」→「取得連結」，
-       會產生一長串網址，裡面每一題都是 entry.XXXXXXXXX=你填的答案 這種格式。
-       把每一題對應的 entry.XXXXXXXXX 複製下來，取代這份檔案裡的 PLAN_ENTRY_ID／NAME_ENTRY_ID 等等 17 個佔位字。
-
-    3. 把該長網址最前面 https://docs.google.com/forms/d/e/xxxxxxxx/viewform 的
-       xxxxxxxx（表單 ID）複製下來，取代下面 form action 裡的 PASTE_YOUR_GOOGLE_FORM_ID_HERE。
-
-    4. 務必用 nikki.humandesign@gmail.com 這個帳號登入建立表單，
-       建好後到「回覆」分頁 → 右上角三個點 →「取得新回覆的電子郵件通知」打開，
-       之後每次有人送出，會自動寄一封通知信到 nikki.humandesign@gmail.com，
-       所有回覆同時也會留在表單後台的「回覆」分頁（可另外連結一個 Google Sheet 檢視）。
+    部署步驟：
+    1. 打開一個新的 Google 試算表（Google Sheet），用來存預約資料。
+    2. 選單「擴充功能」→「Apps Script」，把 apps-script-consult-to-sheet.gs
+       這個檔案的全部內容貼進去，取代預設的程式碼。
+    3. 點「部署」→「新增部署作業」→ 類型選「網頁應用程式」：
+       - 執行身分：我
+       - 誰可以存取：任何人
+       部署後會拿到一個網址（結尾是 /exec），把它貼到下面 APPS_SCRIPT_URL。
+    4. 部署時 Google 會要求授權，跳出視窗選妳的帳號 → 繼續 → 允許即可。
+    5. 之後每次有人送出表單，資料會存進這份 Google Sheet，
+       同時會寄一封通知信到 nikki.humandesign@gmail.com（程式碼裡
+       NOTIFY_EMAIL 變數可以改成別的信箱），也會寄一封確認信給送出表單的人。
     ============================================================
   -->
 
@@ -164,12 +149,12 @@
     <p style="color:var(--color-muted);margin-bottom:2rem;">填寫以下資料，我會主動透過 LINE 與你聯繫確認時間。人類圖需要精確的出生日期、時間與地點才能合圖，請盡量提供正確資訊。</p>
 
     <div class="form-card">
-      <form id="bookForm" name="book" target="hidden_iframe" action="https://docs.google.com/forms/d/e/PASTE_YOUR_GOOGLE_FORM_ID_HERE/formResponse" method="POST">
+      <form id="bookForm" name="book">
         <p style="position:absolute;left:-9999px" aria-hidden="true"><label>不要填寫這格 <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
         <div class="field-block">
           <label class="field-label">預約項目 *</label>
-          <select class="field-input" id="planSelect" name="entry.PLAN_ENTRY_ID" required>
+          <select class="field-input" id="planSelect" name="預約項目" required>
             <option value="">請選擇</option>
             <option value="方案一・單次深度解讀（1.5小時）">方案一・單次深度解讀（1.5 小時）</option>
             <option value="方案二・伴侶諮詢（2.5小時）">方案二・伴侶諮詢（2.5 小時）</option>
@@ -178,35 +163,35 @@
         </div>
         <div class="field-block">
           <label class="field-label">姓名 *</label>
-          <input class="field-input" type="text" name="entry.NAME_ENTRY_ID" required>
+          <input class="field-input" type="text" name="姓名" required>
         </div>
         <div class="field-block">
           <label class="field-label">電話 *</label>
-          <input class="field-input" type="tel" name="entry.PHONE_ENTRY_ID" required>
+          <input class="field-input" type="tel" name="電話" required>
         </div>
         <div class="field-block">
           <label class="field-label">LINE 帳號 *</label>
-          <input class="field-input" type="text" name="entry.LINE_ENTRY_ID" required>
+          <input class="field-input" type="text" name="LINE帳號" required>
         </div>
         <div class="field-block">
           <label class="field-label">Email *</label>
-          <input class="field-input" type="email" name="entry.EMAIL_ENTRY_ID" required>
+          <input class="field-input" type="email" name="Email" required>
         </div>
 
         <p class="field-group-label" id="birthDataLabel">出生資料</p>
 
         <div class="field-block">
           <label class="field-label">出生日期（西元） *</label>
-          <input class="field-input" type="date" name="entry.BIRTHDATE_ENTRY_ID" required>
+          <input class="field-input" type="date" name="出生日期" required>
         </div>
         <div class="field-block">
           <label class="field-label">出生時間 *</label>
-          <input class="field-input" type="time" name="entry.BIRTHTIME_ENTRY_ID" required>
+          <input class="field-input" type="time" name="出生時間" required>
           <p class="field-hint">請盡量提供正確時間（可對照出生證明），若真的不確定，請填寫大概時間，並在下方備註說明。</p>
         </div>
         <div class="field-block">
           <label class="field-label">出生地點 *</label>
-          <input class="field-input" type="text" name="entry.BIRTHPLACE_ENTRY_ID" placeholder="例如：台灣台北市" required>
+          <input class="field-input" type="text" name="出生地點" placeholder="例如：台灣台北市" required>
         </div>
 
         <div id="partnerBirthBlock" style="display:none;">
@@ -214,40 +199,40 @@
 
           <div class="field-block">
             <label class="field-label">伴侶姓名</label>
-            <input class="field-input" type="text" id="partnerNameInput" name="entry.PARTNERNAME_ENTRY_ID">
+            <input class="field-input" type="text" id="partnerNameInput" name="伴侶姓名">
           </div>
           <div class="field-block">
             <label class="field-label">伴侶出生日期（西元）</label>
-            <input class="field-input" type="date" id="partnerBirthdateInput" name="entry.PARTNERBIRTHDATE_ENTRY_ID">
+            <input class="field-input" type="date" id="partnerBirthdateInput" name="伴侶出生日期">
           </div>
           <div class="field-block">
             <label class="field-label">伴侶出生時間</label>
-            <input class="field-input" type="time" id="partnerBirthtimeInput" name="entry.PARTNERBIRTHTIME_ENTRY_ID">
+            <input class="field-input" type="time" id="partnerBirthtimeInput" name="伴侶出生時間">
             <p class="field-hint">若真的不確定，請填寫大概時間，並在下方備註說明。</p>
           </div>
           <div class="field-block">
             <label class="field-label">伴侶出生地點</label>
-            <input class="field-input" type="text" id="partnerBirthplaceInput" name="entry.PARTNERBIRTHPLACE_ENTRY_ID" placeholder="例如：台灣台北市">
+            <input class="field-input" type="text" id="partnerBirthplaceInput" name="伴侶出生地點" placeholder="例如：台灣台北市">
           </div>
         </div>
 
         <div class="field-block">
           <label class="field-label">方便時段（可複選） *</label>
-          <div class="checkbox-row"><input type="checkbox" id="slot1" name="entry.TIMESLOT_ENTRY_ID" value="平日上午（9:00-12:00）"><label for="slot1">平日上午（9:00-12:00）</label></div>
-          <div class="checkbox-row"><input type="checkbox" id="slot2" name="entry.TIMESLOT_ENTRY_ID" value="平日下午（14:00-17:00）"><label for="slot2">平日下午（14:00-17:00）</label></div>
-          <div class="checkbox-row"><input type="checkbox" id="slot3" name="entry.TIMESLOT_ENTRY_ID" value="平日晚上（19:00-21:00）"><label for="slot3">平日晚上（19:00-21:00）</label></div>
-          <div class="checkbox-row"><input type="checkbox" id="slot4" name="entry.TIMESLOT_ENTRY_ID" value="週末（10:00-17:00）"><label for="slot4">週末（10:00-17:00）</label></div>
-          <div class="checkbox-row"><input type="checkbox" id="slot5" name="entry.TIMESLOT_ENTRY_ID" value="其他時間，請在下方備註說明"><label for="slot5">其他時間，請在下方備註說明</label></div>
+          <div class="checkbox-row"><input type="checkbox" id="slot1" name="方便時段" value="平日上午（9:00-12:00）"><label for="slot1">平日上午（9:00-12:00）</label></div>
+          <div class="checkbox-row"><input type="checkbox" id="slot2" name="方便時段" value="平日下午（14:00-17:00）"><label for="slot2">平日下午（14:00-17:00）</label></div>
+          <div class="checkbox-row"><input type="checkbox" id="slot3" name="方便時段" value="平日晚上（19:00-21:00）"><label for="slot3">平日晚上（19:00-21:00）</label></div>
+          <div class="checkbox-row"><input type="checkbox" id="slot4" name="方便時段" value="週末（10:00-17:00）"><label for="slot4">週末（10:00-17:00）</label></div>
+          <div class="checkbox-row"><input type="checkbox" id="slot5" name="方便時段" value="其他時間，請在下方備註說明"><label for="slot5">其他時間，請在下方備註說明</label></div>
         </div>
 
         <div class="field-block" id="otherTimeBlock" style="display:none;">
           <label class="field-label">請寫下你方便的時間</label>
-          <input class="field-input" type="text" id="otherTimeInput" name="entry.OTHERTIME_ENTRY_ID" placeholder="例如：週四晚上9點後都可以">
+          <input class="field-input" type="text" id="otherTimeInput" name="其他方便時間備註" placeholder="例如：週四晚上9點後都可以">
         </div>
 
         <div class="field-block">
           <label class="field-label">付款方式 *</label>
-          <select class="field-input" id="paymentSelect" name="entry.PAYMENT_ENTRY_ID" required>
+          <select class="field-input" id="paymentSelect" name="付款方式" required>
             <option value="">請選擇</option>
             <option value="LINE PAY">LINE PAY</option>
             <option value="轉帳">轉帳</option>
@@ -266,13 +251,13 @@
           </div>
           <div class="field-block">
             <label class="field-label">轉帳後5碼 *</label>
-            <input class="field-input" type="text" id="last5Input" name="entry.LAST5_ENTRY_ID" maxlength="5" placeholder="例如：12345">
+            <input class="field-input" type="text" id="last5Input" name="轉帳後5碼" maxlength="5" placeholder="例如：12345">
           </div>
         </div>
 
         <div class="field-block">
           <label class="field-label">想要特別探索或諮詢的面向，例如人際、感情、工作、人生方向......等</label>
-          <textarea class="field-input" name="entry.NOTE_ENTRY_ID" rows="3" placeholder="不用寫得很完整，簡單描述就好"></textarea>
+          <textarea class="field-input" name="想探索的面向" rows="3" placeholder="不用寫得很完整，簡單描述就好"></textarea>
         </div>
 
         <div style="text-align:center;margin-top:2rem;">
@@ -291,8 +276,6 @@
     </div>
   </div>
 </section>
-
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
 <footer style="padding:2.5rem 0;text-align:center;background:var(--color-primary);">
   <p style="font-size:0.8rem;color:rgba(250,247,242,0.6);margin:0;">© 2026 Designed to be YOU</p>
@@ -382,40 +365,57 @@
   })();
 </script>
 
-<!-- Booking form submit（直接 POST 到 Google 表單，用隱藏 iframe 承接回應） -->
+<!-- Booking form submit（送到 Google Apps Script，寫入 Google Sheet） -->
 <script>
-  (function () {
-    var submitted = false;
-    var form = document.getElementById('bookForm');
-    var iframe = document.getElementById('hidden_iframe');
+  var APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
 
-    iframe.addEventListener('load', function () {
-      if (!submitted) return;
-      form.style.display = 'none';
-      document.getElementById('thanksBox').style.display = 'block';
-    });
+  document.getElementById('bookForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target;
 
-    form.addEventListener('submit', function (e) {
-      if (form.querySelector('input[name="bot-field"]').value) { e.preventDefault(); return; }
+    if (f.querySelector('input[name="bot-field"]').value) { return; }
 
-      if (!form.checkValidity()) {
-        e.preventDefault();
-        document.getElementById('errMsg').style.display = 'block';
-        form.reportValidity();
-        return;
+    if (!f.checkValidity()) {
+      document.getElementById('errMsg').style.display = 'block';
+      f.reportValidity();
+      return;
+    }
+    document.getElementById('errMsg').style.display = 'none';
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '送出中…';
+
+    var formData = new FormData(f);
+    var data = {};
+    formData.forEach(function (value, key) {
+      if (key === 'bot-field') return;
+      if (key === '方便時段') {
+        data[key] = data[key] ? data[key] + '、' + value : value;
+      } else {
+        data[key] = value;
       }
-      document.getElementById('errMsg').style.display = 'none';
-      submitted = true;
-      // 不 preventDefault，讓表單正常送出到隱藏的 iframe
-      // 按鈕的停用/文字改變延到下一個 tick 才做，避免在 submit 事件處理中途
-      // 停用 submitter 按鈕導致部分瀏覽器把這次表單送出取消掉
-      setTimeout(function () {
-        var btn = document.getElementById('submitBtn');
-        btn.disabled = true;
-        btn.textContent = '送出中…';
-      }, 0);
     });
-  })();
+
+    var submissionId = 'web-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ id: submissionId, data: data })
+    })
+    .then(function () {
+      document.getElementById('bookForm').style.display = 'none';
+      document.getElementById('thanksBox').style.display = 'block';
+    })
+    .catch(function () {
+      btn.disabled = false;
+      btn.textContent = '送出預約';
+      var err = document.getElementById('errMsg');
+      err.textContent = '送出失敗，請檢查網路連線後再試一次，或直接透過 LINE 聯絡（nikkido0612）。';
+      err.style.display = 'block';
+    });
+  });
 </script>
 
 </body>
