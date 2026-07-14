@@ -19,16 +19,20 @@
        (6) 出生日期 — 日期
        (7) 出生時間 — 時間
        (8) 出生地點 — 簡答
-       (9) 方便時段 — 核取方塊（複選）— 選項：平日上午（9:00-12:00）／平日下午（14:00-17:00）／平日晚上（19:00-21:00）／週末（10:00-17:00）／其他時間，請在下方備註說明
-       (10) 其他方便時間備註 — 簡答（非必填，勾選「其他時間」才會出現，網頁上用 JS 控制顯示）
-       (11) 付款方式 — 下拉式選單或選擇題 — 選項：LINE PAY／轉帳
-       (12) 轉帳後5碼 — 簡答（非必填，網頁上會用 JS 依付款方式動態要求填寫）
-       (13) 想要特別探索或諮詢的面向，例如人際、感情、工作、人生方向......等 — 段落（非必填）
+       (9) 伴侶姓名 — 簡答（非必填，選方案二才會出現，網頁上用 JS 控制顯示與必填）
+       (10) 伴侶出生日期 — 日期（非必填，同上）
+       (11) 伴侶出生時間 — 時間（非必填，同上）
+       (12) 伴侶出生地點 — 簡答（非必填，同上）
+       (13) 方便時段 — 核取方塊（複選）— 選項：平日上午（9:00-12:00）／平日下午（14:00-17:00）／平日晚上（19:00-21:00）／週末（10:00-17:00）／其他時間，請在下方備註說明
+       (14) 其他方便時間備註 — 簡答（非必填，勾選「其他時間」才會出現，網頁上用 JS 控制顯示）
+       (15) 付款方式 — 下拉式選單或選擇題 — 選項：LINE PAY／轉帳
+       (16) 轉帳後5碼 — 簡答（非必填，網頁上會用 JS 依付款方式動態要求填寫）
+       (17) 想要特別探索或諮詢的面向，例如人際、感情、工作、人生方向......等 — 段落（非必填）
 
     2. 表單建好後，點選「預覽」，把每一題隨便填一個答案，
        再點右上角三個點 →「取得已預先填寫的連結」→「取得連結」，
        會產生一長串網址，裡面每一題都是 entry.XXXXXXXXX=你填的答案 這種格式。
-       把每一題對應的 entry.XXXXXXXXX 複製下來，取代這份檔案裡的 PLAN_ENTRY_ID／NAME_ENTRY_ID 等等 13 個佔位字。
+       把每一題對應的 entry.XXXXXXXXX 複製下來，取代這份檔案裡的 PLAN_ENTRY_ID／NAME_ENTRY_ID 等等 17 個佔位字。
 
     3. 把該長網址最前面 https://docs.google.com/forms/d/e/xxxxxxxx/viewform 的
        xxxxxxxx（表單 ID）複製下來，取代下面 form action 裡的 PASTE_YOUR_GOOGLE_FORM_ID_HERE。
@@ -189,7 +193,7 @@
           <input class="field-input" type="email" name="entry.EMAIL_ENTRY_ID" required>
         </div>
 
-        <p class="field-group-label">生辰資料（人類圖合圖必填）</p>
+        <p class="field-group-label" id="birthDataLabel">出生資料</p>
 
         <div class="field-block">
           <label class="field-label">出生日期（西元） *</label>
@@ -203,6 +207,28 @@
         <div class="field-block">
           <label class="field-label">出生地點 *</label>
           <input class="field-input" type="text" name="entry.BIRTHPLACE_ENTRY_ID" placeholder="例如：台灣台北市" required>
+        </div>
+
+        <div id="partnerBirthBlock" style="display:none;">
+          <p class="field-group-label">伴侶的出生資料</p>
+
+          <div class="field-block">
+            <label class="field-label">伴侶姓名</label>
+            <input class="field-input" type="text" id="partnerNameInput" name="entry.PARTNERNAME_ENTRY_ID">
+          </div>
+          <div class="field-block">
+            <label class="field-label">伴侶出生日期（西元）</label>
+            <input class="field-input" type="date" id="partnerBirthdateInput" name="entry.PARTNERBIRTHDATE_ENTRY_ID">
+          </div>
+          <div class="field-block">
+            <label class="field-label">伴侶出生時間</label>
+            <input class="field-input" type="time" id="partnerBirthtimeInput" name="entry.PARTNERBIRTHTIME_ENTRY_ID">
+            <p class="field-hint">若真的不確定，請填寫大概時間，並在下方備註說明。</p>
+          </div>
+          <div class="field-block">
+            <label class="field-label">伴侶出生地點</label>
+            <input class="field-input" type="text" id="partnerBirthplaceInput" name="entry.PARTNERBIRTHPLACE_ENTRY_ID" placeholder="例如：台灣台北市">
+          </div>
         </div>
 
         <div class="field-block">
@@ -293,6 +319,34 @@
     var plan = new URLSearchParams(window.location.search).get('plan');
     var select = document.getElementById('planSelect');
     if (plan && planMap[plan] && select) { select.value = planMap[plan]; }
+  })();
+</script>
+
+<!-- 選方案二（伴侶諮詢）時，顯示伴侶的出生資料欄位 -->
+<script>
+  (function () {
+    var planSelect = document.getElementById('planSelect');
+    var partnerBlock = document.getElementById('partnerBirthBlock');
+    var birthDataLabel = document.getElementById('birthDataLabel');
+    var partnerInputs = [
+      document.getElementById('partnerNameInput'),
+      document.getElementById('partnerBirthdateInput'),
+      document.getElementById('partnerBirthtimeInput'),
+      document.getElementById('partnerBirthplaceInput')
+    ];
+
+    function updatePartnerBlock() {
+      var isCouple = planSelect.value === '方案二・伴侶諮詢（2.5小時）';
+      partnerBlock.style.display = isCouple ? 'block' : 'none';
+      birthDataLabel.textContent = isCouple ? '你的出生資料' : '出生資料';
+      partnerInputs.forEach(function (input) {
+        input.required = isCouple;
+        if (!isCouple) { input.value = ''; }
+      });
+    }
+
+    planSelect.addEventListener('change', updatePartnerBlock);
+    updatePartnerBlock();
   })();
 </script>
 
