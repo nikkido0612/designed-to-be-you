@@ -126,6 +126,7 @@
     @media (max-width: 860px) { .nav-links { display: none; } }
     .nav-cta { background: var(--color-cta); color: #fff; padding: 0.45rem 1.1rem; border-radius: 10px; font-size: 0.875rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: opacity var(--transition); }
     .nav-cta:hover { opacity: 0.88; }
+    section[id], #top { scroll-margin-top: 84px; }
 
     /* ===== CTA Button ===== */
     .cta-primary {
@@ -642,7 +643,10 @@
         targets.push(child);
       });
     });
+    var ticking = false;
     function reveal() {
+      ticking = false;
+      if (!targets.length) return;
       var vh = window.innerHeight;
       targets = targets.filter(function (el) {
         if (el.getBoundingClientRect().top < vh - 40) {
@@ -652,8 +656,13 @@
         return true;
       });
     }
-    window.addEventListener('scroll', reveal, { passive: true });
-    window.addEventListener('resize', reveal);
+    function onScrollOrResize() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(reveal);
+    }
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize);
     reveal();
   })();
 </script>
