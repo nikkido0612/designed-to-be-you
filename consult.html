@@ -215,8 +215,8 @@
     #cta-final p { color: rgba(250,247,242,0.72); }
 
     /* ===== Scroll reveal ===== */
-    .reveal-el { transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
-    .reveal-pre { opacity: 0; transform: translateY(28px); }
+    .reveal-el { transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-pre { opacity: 0; transform: translateY(42px); }
     @media (prefers-reduced-motion: reduce) {
       .reveal-el { transition: none !important; }
       .reveal-pre { opacity: 1 !important; transform: none !important; }
@@ -633,18 +633,28 @@
 <!-- Scroll reveal script -->
 <script>
   (function () {
-    if (!('IntersectionObserver' in window)) return;
-    var targets = document.querySelectorAll('section:not(#hero) > .container-tight, section:not(#hero) > .container-wide, section:not(#hero) > .container-whatis');
-    targets.forEach(function (el) { el.classList.add('reveal-el', 'reveal-pre'); });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove('reveal-pre');
-          io.unobserve(entry.target);
-        }
+    var containers = document.querySelectorAll('section:not(#hero) > .container-tight, section:not(#hero) > .container-wide, section:not(#hero) > .container-whatis');
+    var targets = [];
+    containers.forEach(function (container) {
+      Array.prototype.forEach.call(container.children, function (child, i) {
+        child.classList.add('reveal-el', 'reveal-pre');
+        child.style.transitionDelay = (Math.min(i, 4) * 0.1) + 's';
+        targets.push(child);
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-    targets.forEach(function (el) { io.observe(el); });
+    });
+    function reveal() {
+      var vh = window.innerHeight;
+      targets = targets.filter(function (el) {
+        if (el.getBoundingClientRect().top < vh - 40) {
+          el.classList.remove('reveal-pre');
+          return false;
+        }
+        return true;
+      });
+    }
+    window.addEventListener('scroll', reveal, { passive: true });
+    window.addEventListener('resize', reveal);
+    reveal();
   })();
 </script>
 
