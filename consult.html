@@ -206,6 +206,9 @@
     details.faq-item summary::after { content: "+"; font-size: 1.4rem; color: var(--color-cta); flex-shrink: 0; transition: transform var(--transition); }
     details.faq-item[open] summary::after { transform: rotate(45deg); }
     details.faq-item .faq-answer { padding: 0 0 1.25rem; color: var(--color-muted); line-height: 1.75; }
+    details.faq-item .faq-answer p { margin-bottom: 1em; }
+    details.faq-item .faq-answer p:last-child { margin-bottom: 0; }
+    details.faq-item .faq-answer li { margin-bottom: 0.4em; }
 
     #cta-final { background: var(--color-primary); color: #FAF7F2; }
     #cta-final h2 { color: #FAF7F2; }
@@ -538,27 +541,62 @@
     <div style="margin-top:1.5rem;">
       <details class="faq-item">
         <summary>這是心理諮商或醫療服務嗎？</summary>
-        <p class="faq-answer">不是。這是人類圖解讀加上教練陪伴，幫助你釐清決定、看懂自己的設計，不能取代醫療或心理治療。如果你正在經歷需要專業醫療協助的狀況，建議優先尋求相關專業協助。</p>
+        <div class="faq-answer">
+          <p>不是。這是人類圖解讀與教練陪伴，協助你理解自己、釐清選擇，不能取代心理治療或醫療服務。</p>
+          <p>若你正經歷明顯的身心困擾，建議優先尋求合格的醫療或心理專業協助。</p>
+        </div>
       </details>
       <details class="faq-item">
-        <summary>解讀完覺得不準怎麼辦？</summary>
-        <p class="faq-answer">人類圖不是算命，沒有「準不準」這回事——它是一套機制，解讀是幫你對照自己的真實經驗。如果聽到某個部分覺得不像你，當下直接說，我們會一起釐清：是解讀角度需要調整，還是那正好是你還沒認出來的自己。</p>
+        <summary>我完全不懂人類圖，也可以預約嗎？</summary>
+        <div class="faq-answer">
+          <p>可以。</p>
+          <p>諮詢會從你目前最想釐清的問題開始，不需要先學過人類圖，也不需要理解任何專有名詞。</p>
+        </div>
       </details>
       <details class="faq-item">
-        <summary>我完全不懂人類圖，適合預約嗎？</summary>
-        <p class="faq-answer">適合。單次解讀會先從你帶來的困惑開始，再完整解讀你的設計，不需要任何基礎。</p>
+        <summary>諮詢前需要準備什麼？</summary>
+        <div class="faq-answer">
+          <p>請準備：</p>
+          <ul style="margin:0 0 1em;padding-left:1.4em;">
+            <li>出生年月日</li>
+            <li>出生時間</li>
+            <li>出生地點</li>
+            <li>一個目前最想釐清的問題</li>
+          </ul>
+          <p>不需要事先整理完整的人生故事。</p>
+        </div>
       </details>
       <details class="faq-item">
-        <summary>可以直接報名方案三（深度陪伴計劃）嗎？</summary>
-        <p class="faq-answer">可以直接透過表單預約，但我們建議先完成方案一的單次深度解讀，這樣陪伴時我們才有共同的設計圖基礎可以對話。</p>
+        <summary>出生時間不確定，也可以預約嗎？</summary>
+        <div class="faq-answer">
+          <p>可以先透過 LINE 告訴我你目前掌握的資訊。</p>
+          <p>出生時間的差異可能影響你的圖的精準度。我會先協助你判斷是否適合進行解讀，或需要再確認相關資料。</p>
+        </div>
       </details>
       <details class="faq-item">
-        <summary>深度陪伴計劃 4 次結束後一定要繼續嗎？</summary>
-        <p class="faq-answer">不用。第 4 次會一起檢視進展，你可以決定要不要加購延伸期，沒有強制續約。</p>
+        <summary>如果解讀內容和我認識的自己不一樣呢？</summary>
+        <div class="faq-answer">
+          <p>你可以當下提出來，我們會一起對照你的真實經驗。</p>
+          <p>人類圖不是要求你接受所有說法，而是提供一個觀察自己的角度；你可以帶回生活中驗證，再判斷哪些內容真正符合你。</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>可以直接預約深度陪伴計畫嗎？</summary>
+        <div class="faq-answer">
+          <p>可以先提出申請。</p>
+          <p>但通常建議先完成一次單次深度解讀，讓我們對你的設計有共同理解，再進入後續陪伴。</p>
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>深度陪伴結束後，一定要繼續嗎？</summary>
+        <div class="faq-answer">
+          <p>不用。</p>
+          <p>第 4 次結束時，我們會一起檢視進展；是否延續，由你依照自己的需要決定。</p>
+        </div>
       </details>
       <details class="faq-item">
         <summary>預約後多久會收到回覆？</summary>
-        <p class="faq-answer">送出預約表單後，我會主動透過 LINE 與你聯繫，確認時間。</p>
+        <p class="faq-answer">送出表單後，我會透過 LINE 與你聯繫，確認時間與諮詢方式。通常會在 1～2 個工作天內回覆。</p>
       </details>
     </div>
   </div>
