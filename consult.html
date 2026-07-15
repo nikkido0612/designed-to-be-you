@@ -214,6 +214,14 @@
     #cta-final h2 { color: #FAF7F2; }
     #cta-final p { color: rgba(250,247,242,0.72); }
 
+    /* ===== Scroll reveal ===== */
+    .reveal-el { transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-pre { opacity: 0; transform: translateY(28px); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-el { transition: none !important; }
+      .reveal-pre { opacity: 1 !important; transform: none !important; }
+    }
+
     /* ===== Form ===== */
     .field-label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--color-primary); }
     .field-input {
@@ -619,6 +627,24 @@
     window.addEventListener('scroll', function () {
       nav.classList.toggle('scrolled', window.scrollY > 20);
     }, { passive: true });
+  })();
+</script>
+
+<!-- Scroll reveal script -->
+<script>
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    var targets = document.querySelectorAll('section:not(#hero) > .container-tight, section:not(#hero) > .container-wide, section:not(#hero) > .container-whatis');
+    targets.forEach(function (el) { el.classList.add('reveal-el', 'reveal-pre'); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('reveal-pre');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    targets.forEach(function (el) { io.observe(el); });
   })();
 </script>
 
