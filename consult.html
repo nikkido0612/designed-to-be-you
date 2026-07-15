@@ -187,9 +187,11 @@
     .speaker-avatar svg { width: 26px; height: 26px; }
     .speaker-bio-item { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.5rem; font-size: 0.95rem; }
     .speaker-bio-item::before { content: "—"; color: var(--color-cta); flex-shrink: 0; }
+    .speaker-bio-text p { margin-bottom: 1em; }
+    .speaker-bio-text p:last-child { margin-bottom: 0; }
     .speaker-stat-row { display: flex; gap: 2rem; margin-top: 1.5rem; }
     .speaker-stat { text-align: center; }
-    @media (max-width: 640px) { .speaker-stat-row { justify-content: center; } }
+    @media (max-width: 640px) { .speaker-stat-row { justify-content: center; gap: 1rem; } .speaker-stat { min-width: 90px; } }
     .speaker-stat .num { font-family: var(--font-headline); font-size: 1.75rem; font-weight: 700; color: var(--color-cta); }
     .speaker-stat .label { font-size: 0.8rem; color: var(--color-muted); }
 
@@ -439,20 +441,24 @@
 <section id="speaker">
   <div class="container-tight">
     <p style="font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--color-muted);font-weight:700;margin-bottom:0.5rem;">關於諮詢師</p>
+    <h2>陪你看懂自己，也陪你把理解帶回生活</h2>
     <div class="speaker-card" style="margin-top:1.5rem;">
       <div class="speaker-avatar">
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="8" r="4" stroke="var(--color-primary)" stroke-width="1.6"/><path d="M4 20c0-3.5 3.5-6 8-6s8 2.5 8 6" stroke="var(--color-primary)" stroke-width="1.6" stroke-linecap="round"/></svg>
       </div>
       <div>
         <h3 style="margin-bottom:0.25rem;">楊明怡 Nikki</h3>
-        <p style="font-size:0.875rem;color:var(--color-muted);margin:0 0 1rem;">IHDS 國際人類圖學院一階引導師・體驗式課程認證講師</p>
-        <div class="speaker-bio-item">修習人類圖超過 15 年</div>
-        <div class="speaker-bio-item">擅長將抽象系統轉化為可操作的日常工具</div>
-        <div class="speaker-bio-item">協助個人與團隊提升自我覺察、溝通效率與決策品質</div>
-        <div class="speaker-bio-item">以互動式與體驗式教學，引導學員將人類圖落實於日常與職場應用</div>
+        <p style="font-size:0.875rem;color:var(--color-muted);margin:0 0 1rem;">IHDS 國際人類圖學院一階引導師<br>體驗式課程認證講師</p>
+        <div class="speaker-bio-text">
+          <p>我修習人類圖超過 15 年，也有 20 年生命教練經驗，陪伴過近千名個案。</p>
+          <p>在諮詢裡，我不只告訴你圖上寫了什麼，更重視你此刻真正卡住的工作、關係或人生選擇。</p>
+          <p>我擅長把抽象的人類圖資訊，轉化成你聽得懂、能對照，也能帶回生活實踐的方式。</p>
+          <p>你不需要先懂人類圖，也不需要急著接受所有解讀。我們會從你的真實經驗出發，一起觀察、釐清，找到更適合你的理解與行動方向。</p>
+        </div>
         <div class="speaker-stat-row">
+          <div class="speaker-stat"><div class="num">15 年以上</div><div class="label">人類圖學習與實踐</div></div>
           <div class="speaker-stat"><div class="num">20 年</div><div class="label">生命教練經驗</div></div>
-          <div class="speaker-stat"><div class="num">近千名</div><div class="label">陪伴個案</div></div>
+          <div class="speaker-stat"><div class="num">近千名</div><div class="label">個案陪伴經驗</div></div>
         </div>
       </div>
     </div>
