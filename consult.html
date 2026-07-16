@@ -221,8 +221,8 @@
     #cta-final p { color: rgba(250,247,242,0.72); }
 
     /* ===== Scroll reveal ===== */
-    .reveal-el { transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
-    .reveal-pre { opacity: 0; transform: translateY(42px); }
+    .reveal-el { transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .reveal-pre { opacity: 0; transform: translateY(24px); }
     @media (prefers-reduced-motion: reduce) {
       .reveal-el { transition: none !important; }
       .reveal-pre { opacity: 1 !important; transform: none !important; }
@@ -656,7 +656,7 @@
       if (!targets.length) return;
       var vh = window.innerHeight;
       targets = targets.filter(function (el) {
-        if (el.getBoundingClientRect().top < vh - 40) {
+        if (el.getBoundingClientRect().top < vh + 150) {
           el.classList.remove('reveal-pre');
           return false;
         }
